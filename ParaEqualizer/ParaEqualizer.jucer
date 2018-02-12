@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="y8eNiB" name="ParaEqualizer" projectType="audioplug" version="1.0.0"
+              bundleIdentifier="com.CLOUD.ParaEqualizer" includeBinaryInAppConfig="1"
+              buildVST="1" buildVST3="0" buildAU="0" buildRTAS="0" buildAAX="0"
+              pluginName="ParaEqualizer" pluginDesc="Multiband Parametric EQ with Filters"
+              pluginManufacturer="CLOUD" pluginManufacturerCode="AEP" pluginCode="RFil"
+              pluginChannelConfigs="{1, 1}, {2, 2}" pluginIsSynth="0" pluginWantsMidiIn="0"
+              pluginProducesMidiOut="0" pluginSilenceInIsSilenceOut="0" pluginEditorRequiresKeys="0"
+              pluginAUExportPrefix="ParaEqualizerAU" pluginRTASCategory=""
+              aaxIdentifier="com.CLOUD.ParaEqualizer" pluginAAXCategory="AAX_ePlugInCategory_Dynamics"
+              jucerVersion="5.1.1" companyName="CLOUD" displaySplashScreen="1"
+              reportAppUsage="1" splashScreenColour="Dark" buildAUv3="0" buildStandalone="0"
+              enableIAA="0" pluginIsMidiEffectPlugin="0" cppLanguageStandard="11"
+              companyEmail="andycloud96@hotmail.com">
+  <MAINGROUP id="cP6xuS" name="ParaEqualizer">
+    <GROUP id="{A6406EF5-C93F-6787-F670-C4BAFC9F55FD}" name="StkLite">
+      <GROUP id="{1AD3681A-6B7B-FCC9-8BA3-82692D2A4FD2}" name="include">
+        <FILE id="Q3uSdy" name="BiQuad.h" compile="0" resource="0" file="Builds/MacOSX/StkLite/include/BiQuad.h"/>
+        <FILE id="NJKuYk" name="Delay.h" compile="0" resource="0" file="Builds/MacOSX/StkLite/include/Delay.h"/>
+        <FILE id="UrIDJs" name="DelayA.h" compile="0" resource="0" file="Builds/MacOSX/StkLite/include/DelayA.h"/>
+        <FILE id="HiPYJX" name="DelayL.h" compile="0" resource="0" file="Builds/MacOSX/StkLite/include/DelayL.h"/>
+        <FILE id="bEqYoo" name="Filter.h" compile="0" resource="0" file="Builds/MacOSX/StkLite/include/Filter.h"/>
+        <FILE id="ewXBeS" name="Fir.h" compile="0" resource="0" file="Builds/MacOSX/StkLite/include/Fir.h"/>
+        <FILE id="qnXdl8" name="FormSwep.h" compile="0" resource="0" file="Builds/MacOSX/StkLite/include/FormSwep.h"/>
+        <FILE id="z9vBBk" name="Iir.h" compile="0" resource="0" file="Builds/MacOSX/StkLite/include/Iir.h"/>
+        <FILE id="XoyrKF" name="OnePole.h" compile="0" resource="0" file="Builds/MacOSX/StkLite/include/OnePole.h"/>
+        <FILE id="H4rw5e" name="OneZero.h" compile="0" resource="0" file="Builds/MacOSX/StkLite/include/OneZero.h"/>
+        <FILE id="BJR5f9" name="PoleZero.h" compile="0" resource="0" file="Builds/MacOSX/StkLite/include/PoleZero.h"/>
+        <FILE id="VirKJ8" name="Stk.h" compile="0" resource="0" file="Builds/MacOSX/StkLite/include/Stk.h"/>
+        <FILE id="g0HRFc" name="TapDelay.h" compile="0" resource="0" file="Builds/MacOSX/StkLite/include/TapDelay.h"/>
+        <FILE id="NoNIbv" name="TwoPole.h" compile="0" resource="0" file="Builds/MacOSX/StkLite/include/TwoPole.h"/>
+        <FILE id="L0u1zE" name="TwoZero.h" compile="0" resource="0" file="Builds/MacOSX/StkLite/include/TwoZero.h"/>
+      </GROUP>
+      <GROUP id="{6AF3D103-9994-2DE1-BE4F-52F9B570713D}" name="src">
+        <FILE id="RDqDYQ" name="BiQuad.cpp" compile="1" resource="0" file="Builds/MacOSX/StkLite/src/BiQuad.cpp"/>
+        <FILE id="dtv8wV" name="Delay.cpp" compile="1" resource="0" file="Builds/MacOSX/StkLite/src/Delay.cpp"/>
+        <FILE id="RpWqO8" name="DelayA.cpp" compile="1" resource="0" file="Builds/MacOSX/StkLite/src/DelayA.cpp"/>
+        <FILE id="myBJiD" name="DelayL.cpp" compile="1" resource="0" file="Builds/MacOSX/StkLite/src/DelayL.cpp"/>
+        <FILE id="HAJS6k" name="Fir.cpp" compile="1" resource="0" file="Builds/MacOSX/StkLite/src/Fir.cpp"/>
+        <FILE id="rcT64Y" name="FormSwep.cpp" compile="1" resource="0" file="Builds/MacOSX/StkLite/src/FormSwep.cpp"/>
+        <FILE id="h9TLJ1" name="Iir.cpp" compile="1" resource="0" file="Builds/MacOSX/StkLite/src/Iir.cpp"/>
+        <FILE id="lZVSC1" name="OnePole.cpp" compile="1" resource="0" file="Builds/MacOSX/StkLite/src/OnePole.cpp"/>
+        <FILE id="B7TUG1" name="OneZero.cpp" compile="1" resource="0" file="Builds/MacOSX/StkLite/src/OneZero.cpp"/>
+        <FILE id="wXrGxY" name="PoleZero.cpp" compile="1" resource="0" file="Builds/MacOSX/StkLite/src/PoleZero.cpp"/>
+        <FILE id="aQbhh5" name="Stk.cpp" compile="1" resource="0" file="Builds/MacOSX/StkLite/src/Stk.cpp"/>
+        <FILE id="oE3TN7" name="TapDelay.cpp" compile="1" resource="0" file="Builds/MacOSX/StkLite/src/TapDelay.cpp"/>
+        <FILE id="bwpWQS" name="TwoPole.cpp" compile="1" resource="0" file="Builds/MacOSX/StkLite/src/TwoPole.cpp"/>
+        <FILE id="s5hOnQ" name="TwoZero.cpp" compile="1" resource="0" file="Builds/MacOSX/StkLite/src/TwoZero.cpp"/>
+      </GROUP>
+    </GROUP>
+    <GROUP id="{85EBBF03-B76C-FF2C-5D08-ACA0BD437BBC}" name="Source">
+      <FILE id="vcXkOO" name="FilterType.h" compile="0" resource="0" file="Source/FilterType.h"/>
+      <FILE id="N8SgQr" name="MultiFilter.cpp" compile="1" resource="0" file="Source/MultiFilter.cpp"/>
+      <FILE id="HPsJmu" name="MultiFilter.h" compile="0" resource="0" file="Source/MultiFilter.h"/>
+      <FILE id="EDTkOm" name="PluginEditor.cpp" compile="1" resource="0"
+            file="Source/PluginEditor.cpp"/>
+      <FILE id="ZSITXB" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
+      <FILE id="XhYm67" name="PluginLookAndFeel.cpp" compile="1" resource="0"
+            file="Source/PluginLookAndFeel.cpp"/>
+      <FILE id="qER4Wh" name="PluginLookAndFeel.h" compile="0" resource="0"
+            file="Source/PluginLookAndFeel.h"/>
+      <FILE id="c4t7Un" name="PluginProcessor.cpp" compile="1" resource="0"
+            file="Source/PluginProcessor.cpp"/>
+      <FILE id="DNnKlo" name="PluginProcessor.h" compile="0" resource="0"
+            file="Source/PluginProcessor.h"/>
+    </GROUP>
+  </MAINGROUP>
+  <EXPORTFORMATS>
+    <XCODE_MAC targetFolder="Builds/MacOSX" vstFolder="~/SDKs/VST3 SDK" postbuildCommand=""
+               vst3Folder="/Users/acloud/Desktop/VST_SDK/VST3_SDK">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug" osxSDK="default" osxCompatibility="default" osxArchitecture="32BitUniversal"
+                       isDebug="1" optimisation="1" targetName="ParaEqualizer" headerPath="/Users/acloud/Desktop/FinalProject/ParaEqualizer/Builds/MacOSX/StkLite/include"/>
+        <CONFIGURATION name="Release" osxSDK="default" osxCompatibility="default" osxArchitecture="32BitUniversal"
+                       isDebug="0" optimisation="2" targetName="ParaEqualizer" linkTimeOptimisation="1"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_core" path="../../../Documents/JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../../../Documents/JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="../../../Documents/JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../../../Documents/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../../../Documents/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../../../Documents/JUCE/modules"/>
+        <MODULEPATH id="juce_cryptography" path="../../../Documents/JUCE/modules"/>
+        <MODULEPATH id="juce_video" path="../../../Documents/JUCE/modules"/>
+        <MODULEPATH id="juce_opengl" path="../../../Documents/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_basics" path="../../../Documents/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../../../Documents/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../../Documents/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../../../Documents/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="../../../Documents/JUCE/modules"/>
+      </MODULEPATHS>
+    </XCODE_MAC>
+  </EXPORTFORMATS>
+  <MODULES>
+    <MODULES id="juce_audio_basics" showAllCode="1" useLocalCopy="0"/>
+    <MODULES id="juce_audio_devices" showAllCode="1" useLocalCopy="0"/>
+    <MODULES id="juce_audio_formats" showAllCode="1" useLocalCopy="0"/>
+    <MODULES id="juce_audio_plugin_client" showAllCode="1" useLocalCopy="0"/>
+    <MODULES id="juce_audio_processors" showAllCode="1" useLocalCopy="0"/>
+    <MODULES id="juce_core" showAllCode="1" useLocalCopy="0"/>
+    <MODULES id="juce_cryptography" showAllCode="1" useLocalCopy="0"/>
+    <MODULES id="juce_data_structures" showAllCode="1" useLocalCopy="0"/>
+    <MODULES id="juce_events" showAllCode="1" useLocalCopy="0"/>
+    <MODULES id="juce_graphics" showAllCode="1" useLocalCopy="0"/>
+    <MODULES id="juce_gui_basics" showAllCode="1" useLocalCopy="0"/>
+    <MODULES id="juce_gui_extra" showAllCode="1" useLocalCopy="0"/>
+    <MODULES id="juce_opengl" showAllCode="1" useLocalCopy="0"/>
+    <MODULES id="juce_video" showAllCode="1" useLocalCopy="0"/>
+  </MODULES>
+  <JUCEOPTIONS JUCE_QUICKTIME="disabled"/>
+</JUCERPROJECT>
