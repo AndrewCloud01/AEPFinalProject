@@ -106,9 +106,13 @@ private:
     const float DEFAULT_A_FILTER_Q = 0.71f;
     const float DEFAULT_A_FILTER_GAIN_DB = 0.f;
     const float DEFAULT_A_OUTPUT_GAIN = 1.f;
-    const FilterType DEFAULT_A_F1_TYPE = FilterType::LowShelf;
+    //const FilterType DEFAULT_A_F1_TYPE = FilterType::LowShelf;        // Original
+    const FilterType DEFAULT_A_F1_TYPE = FilterType::HighPass;
+    
     const FilterType DEFAULT_A_F2_TYPE = FilterType::Peak;
-    const FilterType DEFAULT_A_F3_TYPE = FilterType::HighShelf;
+    
+    //const FilterType DEFAULT_A_F3_TYPE = FilterType::HighShelf;       // Original
+    const FilterType DEFAULT_A_F3_TYPE = FilterType::LowPass;
 
     const float TOTAL_NUM_FILTERS = (float) (int) FilterType::TotalNumFilters;
     

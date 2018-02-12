@@ -19,6 +19,7 @@ PluginAudioProcessor::PluginAudioProcessor()
 {
     uf1Freq = DEFAULT_U_F1_FREQ;
     uf2Freq = DEFAULT_U_F2_FREQ;
+    
     uf3Freq = DEFAULT_U_F3_FREQ;
     uf1Q = uf2Q = uf3Q = DEFAULT_U_FILTER_Q;
     uf1GainDb = uf2GainDb = uf3GainDb = DEFAULT_U_FILTER_GAIN_DB;
