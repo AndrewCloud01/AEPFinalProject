@@ -71,7 +71,7 @@
                vst3Folder="/Users/acloud/Desktop/VST_SDK/VST3_SDK">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" osxSDK="default" osxCompatibility="default" osxArchitecture="32BitUniversal"
-                       isDebug="1" optimisation="1" targetName="ParaEqualizer" headerPath="/Users/acloud/Desktop/FinalProject/ParaEqualizer/Builds/MacOSX/StkLite/include"/>
+                       isDebug="1" optimisation="1" targetName="ParaEqualizer" headerPath="/Users/acloud/Desktop/AEPFinalProject/ParaEqualizer/Builds/MacOSX/StkLite/include"/>
         <CONFIGURATION name="Release" osxSDK="default" osxCompatibility="default" osxArchitecture="32BitUniversal"
                        isDebug="0" optimisation="2" targetName="ParaEqualizer" linkTimeOptimisation="1"/>
       </CONFIGURATIONS>
