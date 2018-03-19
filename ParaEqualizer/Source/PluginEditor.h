@@ -39,7 +39,8 @@
 class PluginAudioProcessorEditor  : public AudioProcessorEditor,
                                     public Timer,
                                     public SliderListener,
-                                    public ComboBoxListener
+                                    public ComboBoxListener,
+                                    public TextEditor::Listener    // SPRINT 2
 {
 public:
     //==============================================================================
@@ -55,9 +56,10 @@ public:
     void resized();
     void sliderValueChanged (Slider* sliderThatWasMoved);
     void comboBoxChanged (ComboBox* comboBoxThatHasChanged);
+    
+    
 
-
-
+ 
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
 
@@ -70,7 +72,7 @@ private:
         return static_cast<PluginAudioProcessor&> (processor);
     }
 
-    PluginLookAndFeel pluginLookAndFeel;
+    //PluginLookAndFeel pluginLookAndFeel;
 
     //[/UserVariables]
 
@@ -97,6 +99,8 @@ private:
     ScopedPointer<ComboBox> f1TypeComboBox;
     ScopedPointer<ComboBox> f2TypeComboBox;
     ScopedPointer<ComboBox> f3TypeComboBox;
+
+    
 
 
     //==============================================================================

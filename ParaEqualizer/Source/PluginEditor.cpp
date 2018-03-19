@@ -30,6 +30,8 @@
 PluginAudioProcessorEditor::PluginAudioProcessorEditor (PluginAudioProcessor& p)
     : AudioProcessorEditor (&p), processor (p)
 {
+
+    
     addAndMakeVisible (f1Group = new GroupComponent ("Band1 Group",
                                                      TRANS("Band1")));
     f1Group->setColour (GroupComponent::outlineColourId, Colour (0xffbbbbbb));
@@ -159,9 +161,9 @@ PluginAudioProcessorEditor::PluginAudioProcessorEditor (PluginAudioProcessor& p)
     outputGainDbSlider->setTextValueSuffix("dB");
 
     // Instantiate Filter Types
-    f1TypeComboBox->setSelectedId(5);       // HP
-    f2TypeComboBox->setSelectedId(2);       // Peak
-    f3TypeComboBox->setSelectedId(4);       // LP
+    //f1TypeComboBox->setSelectedId(1);       // LS
+    //f2TypeComboBox->setSelectedId(2);       // Peak
+    //f3TypeComboBox->setSelectedId(3);       // HS
 
     f1FreqSlider->setDoubleClickReturnValue(true, 800.f);
     f2FreqSlider->setDoubleClickReturnValue(true, 2000.f);
@@ -179,6 +181,7 @@ PluginAudioProcessorEditor::PluginAudioProcessorEditor (PluginAudioProcessor& p)
 
     setSize (480, 232);
 
+    //setSize (1000, 1000);
 
     //[Constructor] You can add your own custom stuff here..
 
@@ -193,7 +196,7 @@ PluginAudioProcessorEditor::~PluginAudioProcessorEditor()
 {
     //[Destructor_pre]. You can add your own custom destruction code here..
     //[/Destructor_pre]
-
+    
     f1Group = nullptr;
     f1FreqSlider = nullptr;
     f1GainDbSlider = nullptr;
@@ -234,6 +237,7 @@ void PluginAudioProcessorEditor::resized()
     //[UserPreResize] Add your own custom resize code here..
     //[/UserPreResize]
 
+
     f1Group->setBounds (0, 0, 160, 200);
     f1FreqSlider->setBounds (8, 104, 142, 40);
     f1GainDbSlider->setBounds (8, 56, 144, 40);
@@ -250,6 +254,7 @@ void PluginAudioProcessorEditor::resized()
     f1TypeComboBox->setBounds (16, 24, 128, 24);
     f2TypeComboBox->setBounds (176, 24, 128, 24);
     f3TypeComboBox->setBounds (336, 24, 128, 24);
+
     
     //[UserResized] Add your own custom resize handling here..
     //[/UserResized]
@@ -362,6 +367,8 @@ void PluginAudioProcessorEditor::sliderValueChanged (Slider* sliderThatWasMoved)
     //[/UsersliderValueChanged_Post]
 }
 
+
+
 void PluginAudioProcessorEditor::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
 {
     //[UsercomboBoxChanged_Pre]
@@ -371,20 +378,36 @@ void PluginAudioProcessorEditor::comboBoxChanged (ComboBox* comboBoxThatHasChang
     {
         //[UserComboBoxCode_f1TypeComboBox] -- add your combo box handling code here..
         
-      
-        //processor.setParameterNotifyingHost(PluginAudioProcessor::Parameters::f1TypeParam,(float)comboBoxThatHasChanged->getSelectedItemIndex() / (float) comboBoxThatHasChanged->getNumItems());
-        //processor.setParameterNotifyingHost(PluginAudioProcessor::Parameters::f1TypeParam, 5.0f);
+        // DISPLAY COMBO BOX VALUES
+        String alert = ("Selected ID: " + (String)comboBoxThatHasChanged->getSelectedId() + "\nItem Index: " + (String)comboBoxThatHasChanged->getSelectedItemIndex() +                     "\nNumItems: " + (String)comboBoxThatHasChanged->getNumItems());
+        //AlertWindow::showMessageBoxAsync (AlertWindow::InfoIcon, "Console Output", alert);
+        // END DISPLAY
         
-        f1GainDbSlider->setEnabled(false);  // SPRINT 1 REVIEW
-        f1QSlider->setEnabled(false);
-        /*
+        processor.setParameterNotifyingHost(PluginAudioProcessor::Parameters::f1TypeParam,(float)comboBoxThatHasChanged->getSelectedItemIndex() / (float) comboBoxThatHasChanged->getNumItems());
+
+        
         if (comboBoxThatHasChanged->getSelectedItemIndex() > 2) {
+            // if Highpass or lowpass
             f1GainDbSlider->setEnabled(false);
+            
+            f1QSlider->setValue(0.707f);     // RESET TO 0.7
+            f1QSlider->setEnabled(false);   // SPRINT 2
         }
         else {
             f1GainDbSlider->setEnabled(true);
+            f1QSlider->setEnabled(true);    // SPRINT 2
         }
-         */
+        
+        // Q Slider for Shelves
+        if (comboBoxThatHasChanged->getSelectedItemIndex() == 0 || comboBoxThatHasChanged->getSelectedItemIndex() == 2){
+            // If highshelf or lowshelf
+            f1QSlider->setValue(0.707f);      // RESET TO 0.7
+            f1QSlider->setEnabled(false);
+        }
+        else{
+            // Do nothing
+        }
+         
         //[/UserComboBoxCode_f1TypeComboBox]
     }
     
@@ -393,20 +416,31 @@ void PluginAudioProcessorEditor::comboBoxChanged (ComboBox* comboBoxThatHasChang
     {
         //[UserComboBoxCode_f2TypeComboBox] -- add your combo box handling code here..
 
-        //processor.setParameterNotifyingHost(PluginAudioProcessor::Parameters::f2TypeParam,(float)comboBoxThatHasChanged->getSelectedItemIndex() / (float) comboBoxThatHasChanged->getNumItems());
-
-        f2GainDbSlider->setEnabled(false);  // SPRING 1 REVIEW
-        f2QSlider->setEnabled(false);
+        processor.setParameterNotifyingHost(PluginAudioProcessor::Parameters::f2TypeParam,(float)comboBoxThatHasChanged->getSelectedItemIndex() / (float) comboBoxThatHasChanged->getNumItems());
         
-        // ORIGINAL
-        /*
+        
         if (comboBoxThatHasChanged->getSelectedItemIndex() > 2) {
+            // if Highpass or lowpass
             f2GainDbSlider->setEnabled(false);
+            
+            f2QSlider->setValue(0.707f);     // RESET TO 0.7
+            f2QSlider->setEnabled(false);   // SPRINT 2
         }
         else {
             f2GainDbSlider->setEnabled(true);
+            f2QSlider->setEnabled(true);    // SPRINT 2
         }
-         */
+        
+        // Q Slider for Shelves
+        if (comboBoxThatHasChanged->getSelectedItemIndex() == 0 || comboBoxThatHasChanged->getSelectedItemIndex() == 2){
+            // If highshelf or lowshelf
+            f2QSlider->setValue(0.707f);      // RESET TO 0.7
+            f2QSlider->setEnabled(false);
+        }
+        else{
+            // Do nothing
+        }
+        
         //[/UserComboBoxCode_f2TypeComboBox]
     }
     
@@ -415,19 +449,31 @@ void PluginAudioProcessorEditor::comboBoxChanged (ComboBox* comboBoxThatHasChang
     else if (comboBoxThatHasChanged == f3TypeComboBox)
     {
         //[UserComboBoxCode_f3TypeComboBox] -- add your combo box handling code here..
-        //processor.setParameterNotifyingHost(PluginAudioProcessor::Parameters::f3TypeParam,(float)comboBoxThatHasChanged->getSelectedItemIndex() / (float) comboBoxThatHasChanged->getNumItems());
+        processor.setParameterNotifyingHost(PluginAudioProcessor::Parameters::f3TypeParam,(float)comboBoxThatHasChanged->getSelectedItemIndex() / (float) comboBoxThatHasChanged->getNumItems());
 
-        f3GainDbSlider->setEnabled(false);  // SPRING 1 REVIEW
-        f3QSlider->setEnabled(false);
-        /*
         if (comboBoxThatHasChanged->getSelectedItemIndex() > 2) {
+            // if Highpass or lowpass
             f3GainDbSlider->setEnabled(false);
+            
+            f3QSlider->setValue(0.707f);     // RESET TO 0.7
+            f3QSlider->setEnabled(false);   // SPRINT 2
         }
         else {
             f3GainDbSlider->setEnabled(true);
+            f3QSlider->setEnabled(true);    // SPRINT 2
         }
-     
-         */
+        
+        // Q Slider for Shelves
+        if (comboBoxThatHasChanged->getSelectedItemIndex() == 0 || comboBoxThatHasChanged->getSelectedItemIndex() == 2){
+            // If highshelf or lowshelf
+            f3QSlider->setValue(0.707f);      // RESET TO 0.7
+            f3QSlider->setEnabled(false);
+        }
+        else{
+            // Do nothing
+        }
+        
+        
         //[/UserComboBoxCode_f3TypeComboBox]
     }
     
@@ -457,13 +503,13 @@ void PluginAudioProcessorEditor::timerCallback()
     );
     
     // SPRINT 1 REVIEW
-    /*
+    
     // Controls Band Type
     f1TypeComboBox->setSelectedItemIndex(
         (int) (ourProcessor.uf1Type * (float) f1TypeComboBox->getNumItems()),
         dontSendNotification
     );
-     */
+    
     
     f2FreqSlider->setValue(
         20 + (ourProcessor.uf2Freq * 19980),
@@ -478,13 +524,13 @@ void PluginAudioProcessorEditor::timerCallback()
         dontSendNotification
     );
     
-    /*
+    
     // Controls Bandtype
     f2TypeComboBox->setSelectedItemIndex(
         (int) (ourProcessor.uf2Type * (float) f2TypeComboBox->getNumItems()),
         dontSendNotification
     );
-     */
+    
 
     // Group 3
     
@@ -503,12 +549,12 @@ void PluginAudioProcessorEditor::timerCallback()
     
     
     // Controls Band Type
-    /*
+    
     f3TypeComboBox->setSelectedItemIndex(
         (int) (ourProcessor.uf3Type * (float) f3TypeComboBox->getNumItems()),
         dontSendNotification
     );
-    */
+    
     
     outputGainDbSlider->setValue(
          -24 + (ourProcessor.uOutputGainDb * 48),
