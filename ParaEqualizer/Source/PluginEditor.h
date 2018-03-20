@@ -39,8 +39,7 @@
 class PluginAudioProcessorEditor  : public AudioProcessorEditor,
                                     public Timer,
                                     public SliderListener,
-                                    public ComboBoxListener,
-                                    public TextEditor::Listener    // SPRINT 2
+                                    public ComboBoxListener
 {
 public:
     //==============================================================================
@@ -61,7 +60,7 @@ public:
 
  
 private:
-    //[UserVariables]   -- You can add your own custom variables in this section.
+    //[UserVariables]   -- variables in this section.
 
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
@@ -107,7 +106,6 @@ private:
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PluginAudioProcessorEditor)
 };
 
-//[EndFile] You can add extra defines here...
 //[/EndFile]
 
 #endif   // __JUCE_HEADER_419FC5D7D3F5212A__

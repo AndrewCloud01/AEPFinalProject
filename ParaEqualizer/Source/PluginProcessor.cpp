@@ -335,7 +335,7 @@ void PluginAudioProcessor::changeProgramName (int index, const String& newName)
 void PluginAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
     // Use this method as the place to do any pre-playback
-    // initialisation that you need..
+    // initialisation that is needed
     fs = sampleRate;
     
     if (filterL1 == nullptr && filterL2 == nullptr && filterL3 == nullptr
@@ -379,9 +379,7 @@ void PluginAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& 
     // In case we have more outputs than inputs, this code clears any output
     // channels that didn't contain input data, (because these aren't
     // guaranteed to be empty - they may contain garbage).
-    // I've added this to avoid people getting screaming feedback
-    // when they first compile the plugin, but obviously you don't need to
-    // this code if your algorithm already fills all the output channels.
+    // Added to avoid screaming feedback
     for (int i = getNumInputChannels(); i < getNumOutputChannels(); ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
     
@@ -396,7 +394,7 @@ void PluginAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& 
 //==============================================================================
 bool PluginAudioProcessor::hasEditor() const
 {
-    return true; // (change this to false if you choose to not supply an editor)
+    return true; // (change this to false if not supply an editor)
 }
 
 AudioProcessorEditor* PluginAudioProcessor::createEditor()

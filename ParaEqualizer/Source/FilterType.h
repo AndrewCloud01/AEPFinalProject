@@ -1,8 +1,8 @@
 //
 //  FilterType.h
-//  BU-P02-MultimodeEQ
+//  Parametric Equalizer - Filters
 //
-//  Created by Brian Uosseph on 2/16/15.
+//  Created by Andrew Cloud on 2/11/18.
 //
 //
 
