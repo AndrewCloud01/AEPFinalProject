@@ -84,15 +84,28 @@ public:
         f3GainParam,
         f3QParam,
         f3TypeParam,
+        
+        // NEW
+        f4FreqParam,
+        f4GainParam,
+        f4QParam,
+        f4TypeParam,
+        
+        f5FreqParam,
+        f5GainParam,
+        f5QParam,
+        f5TypeParam,
+        
+        
         outputGainParam,
         totalNumParams
     };
     
     // Host/Control Values (0-1.f)
-    float uf1Freq,      uf2Freq,        uf3Freq;
-    float uf1Q,         uf2Q,           uf3Q;
-    float uf1GainDb,    uf2GainDb,      uf3GainDb;
-    float uf1Type,      uf2Type,        uf3Type;
+    float uf1Freq,      uf2Freq,        uf3Freq,    uf4Freq,    uf5Freq;
+    float uf1Q,         uf2Q,           uf3Q,       uf4Q,       uf5Q;
+    float uf1GainDb,    uf2GainDb,      uf3GainDb,  uf4GainDb,  uf5GainDb;
+    float uf1Type,      uf2Type,        uf3Type,    uf4Type,    uf5Type;
     float uOutputGainDb;
     
 private:
@@ -103,6 +116,12 @@ private:
     const float DEFAULT_A_F1_FREQ = 800.f;
     const float DEFAULT_A_F2_FREQ = 2000.f;
     const float DEFAULT_A_F3_FREQ = 8000.f;
+    
+    // NEW
+    const float DEFAULT_A_F4_FREQ = 12000.f;
+    const float DEFAULT_A_F5_FREQ = 15000.f;
+    
+    
     const float DEFAULT_A_FILTER_Q = 0.71f;
     const float DEFAULT_A_FILTER_GAIN_DB = 0.f;
     const float DEFAULT_A_OUTPUT_GAIN = 1.f;
@@ -116,6 +135,10 @@ private:
     //const FilterType DEFAULT_A_F3_TYPE = FilterType::HighShelf;       
     //const FilterType DEFAULT_A_F3_TYPE = FilterType::LowPass;
     const FilterType DEFAULT_A_F3_TYPE = FilterType::Peak;
+    
+    // NEW
+    const FilterType DEFAULT_A_F4_TYPE = FilterType::Peak;
+    const FilterType DEFAULT_A_F5_TYPE = FilterType::Peak;
 
     const float TOTAL_NUM_FILTERS = (float) (int) FilterType::TotalNumFilters;
     
@@ -123,26 +146,38 @@ private:
     const float DEFAULT_U_F1_FREQ           = (DEFAULT_A_F1_FREQ - 20) / 19980;
     const float DEFAULT_U_F2_FREQ           = (DEFAULT_A_F2_FREQ - 20) / 19980;
     const float DEFAULT_U_F3_FREQ           = (DEFAULT_A_F3_FREQ - 20) / 19980;
+    // NEW
+    const float DEFAULT_U_F4_FREQ           = (DEFAULT_A_F4_FREQ - 20) / 19980;
+    const float DEFAULT_U_F5_FREQ           = (DEFAULT_A_F5_FREQ - 20) / 19980;
+    
+    
+    
     const float DEFAULT_U_FILTER_Q          = (DEFAULT_A_FILTER_Q - 0.1f) / 9.9f;
     const float DEFAULT_U_FILTER_GAIN_DB    = 0.5f;
     const float DEFAULT_U_F1_TYPE           = (float) (int) DEFAULT_A_F1_TYPE / (float) (int) FilterType::TotalNumFilters;
     const float DEFAULT_U_F2_TYPE           = (float) (int) DEFAULT_A_F2_TYPE / (float) (int) FilterType::TotalNumFilters;
     const float DEFAULT_U_F3_TYPE           = (float) (int) DEFAULT_A_F3_TYPE / (float) (int) FilterType::TotalNumFilters;
+    
+    // NEW
+    const float DEFAULT_U_F4_TYPE           = (float) (int) DEFAULT_A_F4_TYPE / (float) (int) FilterType::TotalNumFilters;
+    const float DEFAULT_U_F5_TYPE           = (float) (int) DEFAULT_A_F5_TYPE / (float) (int) FilterType::TotalNumFilters;
+    
     const float DEFAULT_U_OUTPUT_GAIN_DB    = 0.5f;
     
     // Algorithm Values
     float fs;           // Sampling Frequency
     
-    float af1Freq,      af2Freq,        af3Freq;
-    float af1Q,         af2Q,           af3Q;
-    float af1GainDb,    af2GainDb,      af3GainDb;
-    FilterType af1Type, af2Type,        af3Type;
+    float af1Freq,      af2Freq,        af3Freq,    af4Freq,    af5Freq;
+    float af1Q,         af2Q,           af3Q,       af4Q,       af5Q;
+    float af1GainDb,    af2GainDb,      af3GainDb,  af4GainDb,  af5GainDb;
+    FilterType af1Type, af2Type,        af3Type,    af4Type,    af5Type;
+    
     float aOutputGain;
     
     // Filters
     ScopedPointer<MultiFilter>
-        filterL1, filterL2, filterL3,
-        filterR1, filterR2, filterR3;
+        filterL1, filterL2, filterL3, filterL4, filterL5,
+        filterR1, filterR2, filterR3, filterR4, filterR5;
     
     String filterTypeString(FilterType type);
 };

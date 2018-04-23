@@ -19,23 +19,35 @@ PluginAudioProcessor::PluginAudioProcessor()
 {
     uf1Freq = DEFAULT_U_F1_FREQ;
     uf2Freq = DEFAULT_U_F2_FREQ;
-    
     uf3Freq = DEFAULT_U_F3_FREQ;
-    uf1Q = uf2Q = uf3Q = DEFAULT_U_FILTER_Q;
-    uf1GainDb = uf2GainDb = uf3GainDb = DEFAULT_U_FILTER_GAIN_DB;
+    // NEW
+    uf4Freq = DEFAULT_U_F4_FREQ;
+    uf5Freq = DEFAULT_U_F5_FREQ;
+    uf1Q = uf2Q = uf3Q = uf4Q = uf5Q = DEFAULT_U_FILTER_Q;
+    
+    uf1GainDb = uf2GainDb = uf3GainDb = uf4GainDb = uf5GainDb = DEFAULT_U_FILTER_GAIN_DB;
     uf1Type = DEFAULT_U_F1_TYPE;
     uf2Type = DEFAULT_U_F2_TYPE;
     uf3Type = DEFAULT_U_F3_TYPE;
+    // NEW
+    uf4Type = DEFAULT_U_F4_TYPE;
+    uf5Type = DEFAULT_U_F5_TYPE;
     uOutputGainDb = DEFAULT_U_OUTPUT_GAIN_DB;
     
     af1Freq = DEFAULT_A_F1_FREQ;
     af2Freq = DEFAULT_A_F2_FREQ;
     af3Freq = DEFAULT_A_F3_FREQ;
-    af1Q = af2Q = af3Q = DEFAULT_A_FILTER_Q;
-    af1GainDb = af2GainDb = af3GainDb = DEFAULT_A_FILTER_GAIN_DB;
+    //NEW
+    af4Freq = DEFAULT_A_F4_FREQ;
+    af5Freq = DEFAULT_A_F5_FREQ;
+    af1Q = af2Q = af3Q = af4Q = af5Q = DEFAULT_A_FILTER_Q;
+    
+    af1GainDb = af2GainDb = af3GainDb = af4GainDb = af5GainDb = DEFAULT_A_FILTER_GAIN_DB;
     af1Type = DEFAULT_A_F1_TYPE;
     af2Type = DEFAULT_A_F2_TYPE;
     af3Type = DEFAULT_A_F3_TYPE;
+    af4Type = DEFAULT_A_F4_TYPE;
+    af5Type = DEFAULT_A_F5_TYPE;
     aOutputGain = DEFAULT_A_OUTPUT_GAIN;
 }
 
@@ -82,6 +94,16 @@ float PluginAudioProcessor::getParameter (int index)                    // Must 
         case f3GainParam:       return uf3GainDb;
         case f3QParam:          return uf3Q;
         case f3TypeParam:       return uf3Type;
+            //NEW
+        case f4FreqParam:       return uf4Freq;
+        case f4GainParam:       return uf4GainDb;
+        case f4QParam:          return uf4Q;
+        case f4TypeParam:       return uf4Type;
+            
+        case f5FreqParam:       return uf5Freq;
+        case f5GainParam:       return uf5GainDb;
+        case f5QParam:          return uf5Q;
+        case f5TypeParam:       return uf5Type;
         default:                return 0.0f;
     }
 }
@@ -186,6 +208,69 @@ void PluginAudioProcessor::setParameter (int index, float newValue)     // newVa
             filterL3->changeFilterType(af3Type);
             filterR3->changeFilterType(af3Type);
             break;
+            
+            //NEW
+        case f4FreqParam:
+            uf4Freq = newValue;
+            af4Freq = 20 + (uf4Freq * 19980);
+            filterL4->frequency = af4Freq;
+            filterL4->updateCoefficients();
+            filterR4->frequency = af4Freq;
+            filterR4->updateCoefficients();
+            break;
+        case f4QParam:
+            uf4Q = newValue;
+            af4Q = 0.1f + (uf4Q * 9.9f);
+            filterL4->q = af4Q;
+            filterL4->updateCoefficients();
+            filterR4->q = af4Q;
+            filterR4->updateCoefficients();
+            break;
+        case f4GainParam:
+            uf4GainDb = newValue;
+            af4GainDb = -24 + (uf4GainDb * 48);
+            filterL4->dbGain = af4GainDb;
+            filterL4->updateCoefficients();
+            filterR4->dbGain = af4GainDb;
+            filterR4->updateCoefficients();
+            break;
+        case f4TypeParam:
+            uf4Type = newValue;
+            af4Type = (FilterType) (int) (uf4Type * TOTAL_NUM_FILTERS);
+            filterL4->changeFilterType(af4Type);
+            filterR4->changeFilterType(af4Type);
+            break;
+            
+        case f5FreqParam:
+            uf5Freq = newValue;
+            af5Freq = 20 + (uf5Freq * 19980);
+            filterL5->frequency = af5Freq;
+            filterL5->updateCoefficients();
+            filterR5->frequency = af5Freq;
+            filterR5->updateCoefficients();
+            break;
+        case f5QParam:
+            uf5Q = newValue;
+            af5Q = 0.1f + (uf5Q * 9.9f);
+            filterL5->q = af5Q;
+            filterL5->updateCoefficients();
+            filterR5->q = af5Q;
+            filterR5->updateCoefficients();
+            break;
+        case f5GainParam:
+            uf5GainDb = newValue;
+            af5GainDb = -24 + (uf5GainDb * 48);
+            filterL5->dbGain = af5GainDb;
+            filterL5->updateCoefficients();
+            filterR5->dbGain = af5GainDb;
+            filterR5->updateCoefficients();
+            break;
+        case f5TypeParam:
+            uf5Type = newValue;
+            af5Type = (FilterType) (int) (uf5Type * TOTAL_NUM_FILTERS);
+            filterL5->changeFilterType(af5Type);
+            filterR5->changeFilterType(af5Type);
+            break;
     }
 }
 
@@ -205,6 +290,17 @@ float PluginAudioProcessor::getParameterDefaultValue (int index)        // Must 
         case f3QParam:              return DEFAULT_U_FILTER_Q;
         case f3GainParam:           return DEFAULT_U_FILTER_GAIN_DB;
         case f3TypeParam:           return DEFAULT_U_F3_TYPE;
+                // NEW
+        case f4FreqParam:           return DEFAULT_U_F4_FREQ;
+        case f4QParam:              return DEFAULT_U_FILTER_Q;
+        case f4GainParam:           return DEFAULT_U_FILTER_GAIN_DB;
+        case f4TypeParam:           return DEFAULT_U_F4_TYPE;
+            
+        case f5FreqParam:           return DEFAULT_U_F5_FREQ;
+        case f5QParam:              return DEFAULT_U_FILTER_Q;
+        case f5GainParam:           return DEFAULT_U_FILTER_GAIN_DB;
+        case f5TypeParam:           return DEFAULT_U_F5_TYPE;
+            
         default:                    return 0.0f;
     }
 }
@@ -214,7 +310,10 @@ int PluginAudioProcessor::getParameterNumSteps (int index)
     switch (index) {
         case f1TypeParam:
         case f2TypeParam:
-        case f3TypeParam:           return (int) FilterType::TotalNumFilters;
+        case f3TypeParam:
+        case f4TypeParam:
+        case f5TypeParam:           return (int) FilterType::TotalNumFilters;
+            
         default:                    return AudioProcessor::getDefaultNumParameterSteps();
     }
 }
@@ -235,6 +334,18 @@ const String PluginAudioProcessor::getParameterName (int index)
         case f3QParam:          return String("Filter3 Q");
         case f3GainParam:       return String("Filter3 Gain");
         case f3TypeParam:       return String("Filter3 Type");
+            
+            //NEW
+        case f4FreqParam:       return String("Filter4 Freq");
+        case f4QParam:          return String("Filter4 Q");
+        case f4GainParam:       return String("Filter4 Gain");
+        case f4TypeParam:       return String("Filter4 Type");
+            
+        case f5FreqParam:       return String("Filter5 Freq");
+        case f5QParam:          return String("Filter5 Q");
+        case f5GainParam:       return String("Filter5 Gain");
+        case f5TypeParam:       return String("Filter5 Type");
+            
         default:                return String::empty;
     }
 }
@@ -255,6 +366,18 @@ const String PluginAudioProcessor::getParameterText (int index)
         case f3QParam:          return String(af3Q, 2);
         case f3GainParam:       return String(af3GainDb, 1) + "db";
         case f3TypeParam:       return filterTypeString(af3Type);
+            
+            // NEW
+        case f4FreqParam:       return String(af4Freq, 0) + "Hz";
+        case f4QParam:          return String(af4Q, 2);
+        case f4GainParam:       return String(af4GainDb, 1) + "db";
+        case f4TypeParam:       return filterTypeString(af4Type);
+            
+        case f5FreqParam:       return String(af5Freq, 0) + "Hz";
+        case f5QParam:          return String(af5Q, 2);
+        case f5GainParam:       return String(af5GainDb, 1) + "db";
+        case f5TypeParam:       return filterTypeString(af5Type);
+            
         default:                return String(getParameter(index), 2);
     }
 }
@@ -338,22 +461,38 @@ void PluginAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock
     // initialisation that is needed
     fs = sampleRate;
     
-    if (filterL1 == nullptr && filterL2 == nullptr && filterL3 == nullptr
-        && filterR1 == nullptr && filterR2 == nullptr && filterR3 == nullptr) {
+    if (filterL1 == nullptr && filterL2 == nullptr && filterL3 == nullptr && filterL4 == nullptr && filterL4 == nullptr
+        && filterR1 == nullptr && filterR2 == nullptr && filterR3 == nullptr && filterR4 == nullptr && filterR5 == nullptr)
+    {
+        // LEFT
         filterL1 = new MultiFilter(af1Type, sampleRate, af1Freq);
         filterL2 = new MultiFilter(af2Type, sampleRate, af2Freq);
         filterL3 = new MultiFilter(af3Type, sampleRate, af3Freq);
+        // NEW
+        filterL4 = new MultiFilter(af4Type, sampleRate, af4Freq);
+        filterL5 = new MultiFilter(af5Type, sampleRate, af5Freq);
+        
+        // RIGHT
         filterR1 = new MultiFilter(af1Type, sampleRate, af1Freq);
         filterR2 = new MultiFilter(af2Type, sampleRate, af2Freq);
         filterR3 = new MultiFilter(af3Type, sampleRate, af3Freq);
+        //NEW
+        filterR4 = new MultiFilter(af4Type, sampleRate, af4Freq);
+        filterR5 = new MultiFilter(af5Type, sampleRate, af5Freq);
     }
     else {
         filterL1->updateSampleRate(fs);
         filterL2->updateSampleRate(fs);
         filterL3->updateSampleRate(fs);
+        filterL4->updateSampleRate(fs);
+        filterL5->updateSampleRate(fs);
+        
         filterR1->updateSampleRate(fs);
         filterR2->updateSampleRate(fs);
         filterR3->updateSampleRate(fs);
+        filterR4->updateSampleRate(fs);
+        filterR5->updateSampleRate(fs);
+        
     }
 }
 
@@ -371,9 +510,14 @@ void PluginAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& 
         filterL1->updateSampleRate(fs);
         filterL2->updateSampleRate(fs);
         filterL3->updateSampleRate(fs);
+        filterL4->updateSampleRate(fs);
+        filterL5->updateSampleRate(fs);
+        
         filterR1->updateSampleRate(fs);
         filterR2->updateSampleRate(fs);
         filterR3->updateSampleRate(fs);
+        filterR4->updateSampleRate(fs);
+        filterR5->updateSampleRate(fs);
     }
     
     // In case we have more outputs than inputs, this code clears any output
@@ -386,8 +530,12 @@ void PluginAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& 
     float* leftChannel = buffer.getWritePointer(0);
     float* rightChannel = buffer.getWritePointer(1);
     for (int i = 0; i < buffer.getNumSamples(); i++) {
+        leftChannel[i]  = aOutputGain * filterL5->tick(filterL4->tick(filterL3->tick(filterL2->tick(filterL1->tick(leftChannel[i])))));
+        rightChannel[i] = aOutputGain * filterR5->tick(filterR4->tick(filterR3->tick(filterR2->tick(filterR1->tick(rightChannel[i])))));
+        /*
         leftChannel[i]  = aOutputGain * filterL3->tick(filterL2->tick(filterL1->tick(leftChannel[i])));
         rightChannel[i] = aOutputGain * filterR3->tick(filterR2->tick(filterR1->tick(rightChannel[i])));
+         */
     }
 }
 

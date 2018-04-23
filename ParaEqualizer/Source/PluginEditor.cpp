@@ -59,7 +59,7 @@ PluginAudioProcessorEditor::PluginAudioProcessorEditor (PluginAudioProcessor& p)
     outputGainDbSlider->setTextBoxStyle (Slider::TextBoxRight, false, 80, 20);
     outputGainDbSlider->addListener (this);
 
-    addAndMakeVisible (f2Group = new GroupComponent ("Filter2 Group",
+    addAndMakeVisible (f2Group = new GroupComponent ("Band2 Group",
                                                      TRANS("Band2")));
     f2Group->setColour (GroupComponent::outlineColourId, Colour (0xffbbbbbb));
     f2Group->setColour (GroupComponent::textColourId, Colours::white);
@@ -106,6 +106,53 @@ PluginAudioProcessorEditor::PluginAudioProcessorEditor (PluginAudioProcessor& p)
     f3QSlider->setTextBoxStyle (Slider::TextBoxBelow, false, 80, 20);
     f3QSlider->addListener (this);
     
+    // NEW
+    addAndMakeVisible (f4Group = new GroupComponent ("Band4 Group",
+                                                     TRANS("Band4")));
+    f4Group->setColour (GroupComponent::outlineColourId, Colour (0xffbbbbbb));
+    f4Group->setColour (GroupComponent::textColourId, Colours::white);
+    
+    addAndMakeVisible (f4FreqSlider = new Slider ("Band4 Frequency"));
+    f4FreqSlider->setRange (20, 20000, 0);
+    f4FreqSlider->setSliderStyle (Slider::LinearHorizontal);
+    f4FreqSlider->setTextBoxStyle (Slider::TextBoxBelow, false, 80, 20);
+    f4FreqSlider->addListener (this);
+    
+    addAndMakeVisible (f4GainDbSlider = new Slider ("Band4 Gain"));
+    f4GainDbSlider->setRange (-24, 24, 0.1);
+    f4GainDbSlider->setSliderStyle (Slider::LinearHorizontal);
+    f4GainDbSlider->setTextBoxStyle (Slider::TextBoxBelow, false, 80, 20);
+    f4GainDbSlider->addListener (this);
+    
+    addAndMakeVisible (f4QSlider = new Slider ("Band4 Q"));
+    f4QSlider->setRange (0.1, 10, 0.01);
+    f4QSlider->setSliderStyle (Slider::LinearHorizontal);
+    f4QSlider->setTextBoxStyle (Slider::TextBoxBelow, false, 80, 20);
+    f4QSlider->addListener (this);
+    
+    // Froup 5
+    addAndMakeVisible (f5Group = new GroupComponent ("Band5 Group",
+                                                     TRANS("Band5")));
+    f5Group->setColour (GroupComponent::outlineColourId, Colour (0xffbbbbbb));
+    f5Group->setColour (GroupComponent::textColourId, Colours::white);
+    
+    addAndMakeVisible (f5FreqSlider = new Slider ("Band5 Frequency"));
+    f5FreqSlider->setRange (20, 20000, 0);
+    f5FreqSlider->setSliderStyle (Slider::LinearHorizontal);
+    f5FreqSlider->setTextBoxStyle (Slider::TextBoxBelow, false, 80, 20);
+    f5FreqSlider->addListener (this);
+    
+    addAndMakeVisible (f5GainDbSlider = new Slider ("Band5 Gain"));
+    f5GainDbSlider->setRange (-24, 24, 0.1);
+    f5GainDbSlider->setSliderStyle (Slider::LinearHorizontal);
+    f5GainDbSlider->setTextBoxStyle (Slider::TextBoxBelow, false, 80, 20);
+    f5GainDbSlider->addListener (this);
+    
+    addAndMakeVisible (f5QSlider = new Slider ("Band5 Q"));
+    f5QSlider->setRange (0.1, 10, 0.01);
+    f5QSlider->setSliderStyle (Slider::LinearHorizontal);
+    f5QSlider->setTextBoxStyle (Slider::TextBoxBelow, false, 80, 20);
+    f5QSlider->addListener (this);
     
     
     addAndMakeVisible (f1TypeComboBox = new ComboBox ("Band1 Type"));
@@ -145,16 +192,48 @@ PluginAudioProcessorEditor::PluginAudioProcessorEditor (PluginAudioProcessor& p)
     f3TypeComboBox->addItem (TRANS("HighPass"), 5);
     f3TypeComboBox->addListener (this);
     
-
+    // NEW
+    addAndMakeVisible (f4TypeComboBox = new ComboBox ("Band4 Type"));
+    f4TypeComboBox->setEditableText (false);
+    f4TypeComboBox->setJustificationType (Justification::centred);
+    f4TypeComboBox->setTextWhenNothingSelected (TRANS("Band Type"));
+    f4TypeComboBox->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
+    f4TypeComboBox->addItem (TRANS("Low Shelf"), 1);
+    f4TypeComboBox->addItem (TRANS("Peak"), 2);
+    f4TypeComboBox->addItem (TRANS("High Shelf"), 3);
+    f4TypeComboBox->addItem (TRANS("LowPass"), 4);
+    f4TypeComboBox->addItem (TRANS("HighPass"), 5);
+    f4TypeComboBox->addListener (this);
+    
+    // GROUP 5
+    addAndMakeVisible (f5TypeComboBox = new ComboBox ("Band5 Type"));
+    f5TypeComboBox->setEditableText (false);
+    f5TypeComboBox->setJustificationType (Justification::centred);
+    f5TypeComboBox->setTextWhenNothingSelected (TRANS("Band Type"));
+    f5TypeComboBox->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
+    f5TypeComboBox->addItem (TRANS("Low Shelf"), 1);
+    f5TypeComboBox->addItem (TRANS("Peak"), 2);
+    f5TypeComboBox->addItem (TRANS("High Shelf"), 3);
+    f5TypeComboBox->addItem (TRANS("LowPass"), 4);
+    f5TypeComboBox->addItem (TRANS("HighPass"), 5);
+    f5TypeComboBox->addListener (this);
+    
+    
     //[UserPreSize]
     // Add any other settings not offered by GUI editor here, else they'll be deleted
     f1FreqSlider->setTextValueSuffix("Hz");
     f2FreqSlider->setTextValueSuffix("Hz");
     f3FreqSlider->setTextValueSuffix("Hz");
+    // NEW
+    f4FreqSlider->setTextValueSuffix("Hz");
+    f5FreqSlider->setTextValueSuffix("Hz");
     
     f1GainDbSlider->setTextValueSuffix("dB");
     f2GainDbSlider->setTextValueSuffix("dB");
     f3GainDbSlider->setTextValueSuffix("dB");
+    //NEW
+    f4GainDbSlider->setTextValueSuffix("dB");
+    f5GainDbSlider->setTextValueSuffix("dB");
     
     outputGainDbSlider->setTextValueSuffix("dB");
 
@@ -166,20 +245,31 @@ PluginAudioProcessorEditor::PluginAudioProcessorEditor (PluginAudioProcessor& p)
     f1FreqSlider->setDoubleClickReturnValue(true, 800.f);
     f2FreqSlider->setDoubleClickReturnValue(true, 2000.f);
     f3FreqSlider->setDoubleClickReturnValue(true, 8000.f);
+    //NEW
+    f4FreqSlider->setDoubleClickReturnValue(true, 12000.f);
+    f5FreqSlider->setDoubleClickReturnValue(true, 15000.f);
 
     f1QSlider->setDoubleClickReturnValue(true, 0.71f);
     f2QSlider->setDoubleClickReturnValue(true, 0.71f);
     f3QSlider->setDoubleClickReturnValue(true, 0.71f);
+    //NEW
+    f4QSlider->setDoubleClickReturnValue(true, 0.71f);
+    f5QSlider->setDoubleClickReturnValue(true, 0.71f);
 
     f1GainDbSlider->setDoubleClickReturnValue(true, 0.f);
     f2GainDbSlider->setDoubleClickReturnValue(true, 0.f);
     f3GainDbSlider->setDoubleClickReturnValue(true, 0.f);
+    //NEW
+    f4GainDbSlider->setDoubleClickReturnValue(true, 0.f);
+    f5GainDbSlider->setDoubleClickReturnValue(true, 0.f);
+    
+    
     outputGainDbSlider->setDoubleClickReturnValue(true, 0.f);
     //[/UserPreSize]
 
-    setSize (480, 232);
+    //setSize (480, 232);
 
-    //setSize (1000, 1000);
+    setSize (800, 300);
 
     //[Constructor] Custom stuff
 
@@ -198,18 +288,35 @@ PluginAudioProcessorEditor::~PluginAudioProcessorEditor()
     f1FreqSlider = nullptr;
     f1GainDbSlider = nullptr;
     f1QSlider = nullptr;
+    
     outputGainDbSlider = nullptr;
+    
     f2Group = nullptr;
     f2FreqSlider = nullptr;
     f2GainDbSlider = nullptr;
     f2QSlider = nullptr;
+    
     f3Group = nullptr;
     f3FreqSlider = nullptr;
     f3GainDbSlider = nullptr;
     f3QSlider = nullptr;
+    
+    //NEW
+    f4Group = nullptr;
+    f4FreqSlider = nullptr;
+    f4GainDbSlider = nullptr;
+    f4QSlider = nullptr;
+    //GROUP 5
+    f5Group = nullptr;
+    f5FreqSlider = nullptr;
+    f5GainDbSlider = nullptr;
+    f5QSlider = nullptr;
+    
     f1TypeComboBox = nullptr;
     f2TypeComboBox = nullptr;
     f3TypeComboBox = nullptr;
+    f4TypeComboBox = nullptr;
+    f5TypeComboBox = nullptr;
 
 
     //[Destructor] Custom stuff
@@ -238,18 +345,36 @@ void PluginAudioProcessorEditor::resized()
     f1FreqSlider->setBounds (8, 104, 142, 40);
     f1GainDbSlider->setBounds (8, 56, 144, 40);
     f1QSlider->setBounds (8, 152, 144, 40);
+    
     outputGainDbSlider->setBounds (240 - (448 / 2), 200, 448, 32);
+    
     f2Group->setBounds (160, 0, 160, 200);
     f2FreqSlider->setBounds (168, 104, 142, 40);
     f2GainDbSlider->setBounds (168, 56, 144, 40);
     f2QSlider->setBounds (168, 152, 144, 40);
+    
     f3Group->setBounds (320, 0, 160, 200);
-    f3FreqSlider->setBounds (328, 104, 144, 40);
+    f3FreqSlider->setBounds (328, 104, 142, 40);
     f3GainDbSlider->setBounds (328, 56, 144, 40);
     f3QSlider->setBounds (328, 152, 144, 40);
+    
+    //NEW
+    f4Group->setBounds (480, 0, 160, 200);
+    f4FreqSlider->setBounds (488, 104, 144, 40);
+    f4GainDbSlider->setBounds (488, 56, 144, 40);
+    f4QSlider->setBounds (488, 152, 144, 40);
+    
+    f5Group->setBounds (640, 0, 160, 200);
+    f5FreqSlider->setBounds (648, 104, 142, 40);
+    f5GainDbSlider->setBounds (648, 56, 144, 40);
+    f5QSlider->setBounds (648, 152, 144, 40);
+    
     f1TypeComboBox->setBounds (16, 24, 128, 24);
     f2TypeComboBox->setBounds (176, 24, 128, 24);
     f3TypeComboBox->setBounds (336, 24, 128, 24);
+    //NEW
+    f4TypeComboBox->setBounds (496, 24, 128, 24);
+    f5TypeComboBox->setBounds (656, 24, 128, 24);
 
     
     //[/UserResized]
@@ -260,6 +385,7 @@ void PluginAudioProcessorEditor::sliderValueChanged (Slider* sliderThatWasMoved)
     //[UsersliderValueChanged_Pre]
     //[/UsersliderValueChanged_Pre]
 
+    //GROUP 1
     if (sliderThatWasMoved == f1FreqSlider)
     {
         //[UserSliderCode_f1FreqSlider] -- slider handling code here
@@ -287,6 +413,8 @@ void PluginAudioProcessorEditor::sliderValueChanged (Slider* sliderThatWasMoved)
         );
         //[/UserSliderCode_f1QSlider]
     }
+    
+    // OUTPUT GAIN
     else if (sliderThatWasMoved == outputGainDbSlider)
     {
         //[UserSliderCode_outputGainDbSlider] -- slider handling code here
@@ -328,7 +456,6 @@ void PluginAudioProcessorEditor::sliderValueChanged (Slider* sliderThatWasMoved)
     }
     
     // Group 3
-    
     else if (sliderThatWasMoved == f3FreqSlider)
     {
         //[UserSliderCode_f3FreqSlider] -- slider handling code here
@@ -357,7 +484,65 @@ void PluginAudioProcessorEditor::sliderValueChanged (Slider* sliderThatWasMoved)
         //[/UserSliderCode_f3QSlider]
     }
     
-
+    // Group 4
+    else if (sliderThatWasMoved == f4FreqSlider)
+    {
+        //[UserSliderCode_f4FreqSlider] -- slider handling code here
+        processor.setParameterNotifyingHost(
+                                            PluginAudioProcessor::Parameters::f4FreqParam,
+                                            (sliderThatWasMoved->getValue() - 20) / 19980
+                                            );
+        //[/UserSliderCode_f4FreqSlider]
+    }
+    else if (sliderThatWasMoved == f4GainDbSlider)
+    {
+        //[UserSliderCode_f4GainDbSlider] -- slider handling code here
+        processor.setParameterNotifyingHost(
+                                            PluginAudioProcessor::Parameters::f4GainParam,
+                                            (sliderThatWasMoved->getValue() + 24) / 48
+                                            );
+        //[/UserSliderCode_f4GainDbSlider]
+    }
+    else if (sliderThatWasMoved == f4QSlider)
+    {
+        //[UserSliderCode_f4QSlider] -- slider handling code here
+        processor.setParameterNotifyingHost(
+                                            PluginAudioProcessor::Parameters::f4QParam,
+                                            (sliderThatWasMoved->getValue() - 0.1f) / 9.9f
+                                            );
+        //[/UserSliderCode_f4QSlider]
+    }
+    
+    // Group 5
+    else if (sliderThatWasMoved == f5FreqSlider)
+    {
+        //[UserSliderCode_f5FreqSlider] -- slider handling code here
+        processor.setParameterNotifyingHost(
+                                            PluginAudioProcessor::Parameters::f5FreqParam,
+                                            (sliderThatWasMoved->getValue() - 20) / 19980
+                                            );
+        //[/UserSliderCode_f5FreqSlider]
+    }
+    else if (sliderThatWasMoved == f5GainDbSlider)
+    {
+        //[UserSliderCode_f5GainDbSlider] -- slider handling code here
+        processor.setParameterNotifyingHost(
+                                            PluginAudioProcessor::Parameters::f5GainParam,
+                                            (sliderThatWasMoved->getValue() + 24) / 48
+                                            );
+        //[/UserSliderCode_f5GainDbSlider]
+    }
+    else if (sliderThatWasMoved == f5QSlider)
+    {
+        //[UserSliderCode_f5QSlider] -- slider handling code here
+        processor.setParameterNotifyingHost(
+                                            PluginAudioProcessor::Parameters::f5QParam,
+                                            (sliderThatWasMoved->getValue() - 0.1f) / 9.9f
+                                            );
+        //[/UserSliderCode_f3QSlider]
+    }
+    
+    
     //[UsersliderValueChanged_Post]
     //[/UsersliderValueChanged_Post]
 }
@@ -527,6 +712,100 @@ void PluginAudioProcessorEditor::comboBoxChanged (ComboBox* comboBoxThatHasChang
         //[/UserComboBoxCode_f3TypeComboBox]
     }
     
+    // Group 4
+    else if (comboBoxThatHasChanged == f4TypeComboBox)
+    {
+        //[UserComboBoxCode_f2TypeComboBox]
+        
+        // Info Sent values:
+        // 0   = Low Shelf
+        // 0.2 = Peak
+        // 0.4 = High Shelf
+        // 0.6 = Lowpass
+        // 0.8 = Highpass
+        
+        float infoSent =(float)comboBoxThatHasChanged->getSelectedItemIndex() / (float) comboBoxThatHasChanged->getNumItems();  // Info sent to processor
+        
+        String alert = ("Selected ID: " + (String)comboBoxThatHasChanged->getSelectedId() + "\nItem Index: " + (String)comboBoxThatHasChanged->getSelectedItemIndex() +                     "\nNumItems: " + (String)comboBoxThatHasChanged->getNumItems() + "\nInfo Sent: " + (String)infoSent);
+        AlertWindow::showMessageBoxAsync (AlertWindow::InfoIcon, "Console Output", alert);
+        
+        
+        // ORIGINAL
+        processor.setParameterNotifyingHost(PluginAudioProcessor::Parameters::f4TypeParam,(float)comboBoxThatHasChanged->getSelectedItemIndex() / (float) comboBoxThatHasChanged->getNumItems());
+        
+        
+        if (comboBoxThatHasChanged->getSelectedItemIndex() > 2) {
+            // if Highpass or lowpass
+            f4GainDbSlider->setEnabled(false);
+            
+            f4QSlider->setValue(0.707f);     // RESET TO 0.7
+            f4QSlider->setEnabled(false);    // SPRINT 2 Demonstration
+        }
+        else {
+            f4GainDbSlider->setEnabled(true);
+            f4QSlider->setEnabled(true);    // SPRINT 2 Demonstration
+        }
+        
+        // Q Slider for Shelves
+        if (comboBoxThatHasChanged->getSelectedItemIndex() == 0 || comboBoxThatHasChanged->getSelectedItemIndex() == 2){
+            // If highshelf or lowshelf
+            f4QSlider->setValue(0.707f);      // RESET TO 0.7
+            f4QSlider->setEnabled(false);
+        }
+        else{
+            // Do nothing
+        }
+        
+        //[/UserComboBoxCode_f2TypeComboBox]
+    }
+    
+    // Group 5
+    else if (comboBoxThatHasChanged == f5TypeComboBox)
+    {
+        //[UserComboBoxCode_f5TypeComboBox]
+        
+        // Info Sent values:
+        // 0   = Low Shelf
+        // 0.2 = Peak
+        // 0.4 = High Shelf
+        // 0.6 = Lowpass
+        // 0.8 = Highpass
+        
+        float infoSent =(float)comboBoxThatHasChanged->getSelectedItemIndex() / (float) comboBoxThatHasChanged->getNumItems();  // Info sent to processor
+        
+        String alert = ("Selected ID: " + (String)comboBoxThatHasChanged->getSelectedId() + "\nItem Index: " + (String)comboBoxThatHasChanged->getSelectedItemIndex() +                     "\nNumItems: " + (String)comboBoxThatHasChanged->getNumItems() + "\nInfo Sent: " + (String)infoSent);
+        AlertWindow::showMessageBoxAsync (AlertWindow::InfoIcon, "Console Output", alert);
+        
+        
+        // ORIGINAL
+        processor.setParameterNotifyingHost(PluginAudioProcessor::Parameters::f5TypeParam,(float)comboBoxThatHasChanged->getSelectedItemIndex() / (float) comboBoxThatHasChanged->getNumItems());
+        
+        
+        if (comboBoxThatHasChanged->getSelectedItemIndex() > 2) {
+            // if Highpass or lowpass
+            f5GainDbSlider->setEnabled(false);
+            
+            f5QSlider->setValue(0.707f);     // RESET TO 0.7
+            f5QSlider->setEnabled(false);    // SPRINT 2 Demonstration
+        }
+        else {
+            f5GainDbSlider->setEnabled(true);
+            f5QSlider->setEnabled(true);    // SPRINT 2 Demonstration
+        }
+        
+        // Q Slider for Shelves
+        if (comboBoxThatHasChanged->getSelectedItemIndex() == 0 || comboBoxThatHasChanged->getSelectedItemIndex() == 2){
+            // If highshelf or lowshelf
+            f5QSlider->setValue(0.707f);      // RESET TO 0.7
+            f5QSlider->setEnabled(false);
+        }
+        else{
+            // Do nothing
+        }
+        
+        //[/UserComboBoxCode_f5TypeComboBox]
+    }
+    
     
     //[UsercomboBoxChanged_Post]
     //[/UsercomboBoxChanged_Post]
@@ -539,6 +818,8 @@ void PluginAudioProcessorEditor::timerCallback()
     // Timer conflicts cause UI stuttering, this is due to the values not being mapped back
     PluginAudioProcessor& ourProcessor = getProcessor();
 
+    
+    // GROUP 1
     f1FreqSlider->setValue(
         20 + (ourProcessor.uf1Freq * 19980),
         dontSendNotification
@@ -551,15 +832,13 @@ void PluginAudioProcessorEditor::timerCallback()
         -24 + (ourProcessor.uf1GainDb * 48),
         dontSendNotification
     );
-    
-    
     // Controls Band Type
     f1TypeComboBox->setSelectedItemIndex(
         (int) (ourProcessor.uf1Type * (float) f1TypeComboBox->getNumItems()),
         dontSendNotification
     );
     
-    
+    // GROUP 2
     f2FreqSlider->setValue(
         20 + (ourProcessor.uf2Freq * 19980),
         dontSendNotification
@@ -572,17 +851,13 @@ void PluginAudioProcessorEditor::timerCallback()
         -24 + (ourProcessor.uf2GainDb * 48),
         dontSendNotification
     );
-    
-    
     // Controls Bandtype
     f2TypeComboBox->setSelectedItemIndex(
         (int) (ourProcessor.uf2Type * (float) f2TypeComboBox->getNumItems()),
         dontSendNotification
     );
     
-
     // Group 3
-    
     f3FreqSlider->setValue(
         20 + (ourProcessor.uf3Freq * 19980),
         dontSendNotification
@@ -595,16 +870,52 @@ void PluginAudioProcessorEditor::timerCallback()
         -24 + (ourProcessor.uf3GainDb * 48),
         dontSendNotification
     );
-    
-    
     // Controls Band Type
-    
     f3TypeComboBox->setSelectedItemIndex(
         (int) (ourProcessor.uf3Type * (float) f3TypeComboBox->getNumItems()),
         dontSendNotification
     );
     
+    //NEW
+    // Group 4
+    f4FreqSlider->setValue(
+        20 + (ourProcessor.uf4Freq * 19980),
+        dontSendNotification
+    );
+    f4QSlider->setValue(
+        0.1f + (ourProcessor.uf4Q * 9.9f),
+        dontSendNotification
+    );
+    f4GainDbSlider->setValue(
+        -24 + (ourProcessor.uf4GainDb * 48),
+        dontSendNotification
+    );
+    // Controls Band Type
+    f4TypeComboBox->setSelectedItemIndex(
+        (int) (ourProcessor.uf4Type * (float) f4TypeComboBox->getNumItems()),
+        dontSendNotification
+    );
     
+    // Group 4
+    f5FreqSlider->setValue(
+        20 + (ourProcessor.uf5Freq * 19980),
+        dontSendNotification
+    );
+    f5QSlider->setValue(
+        0.1f + (ourProcessor.uf5Q * 9.9f),
+        dontSendNotification
+    );
+    f5GainDbSlider->setValue(
+        -24 + (ourProcessor.uf5GainDb * 48),
+        dontSendNotification
+    );
+    // Controls Band Type
+    f5TypeComboBox->setSelectedItemIndex(
+        (int) (ourProcessor.uf5Type * (float) f5TypeComboBox->getNumItems()),
+        dontSendNotification
+    );
+    
+    //OUTPUT GAIN
     outputGainDbSlider->setValue(
          -24 + (ourProcessor.uOutputGainDb * 48),
         dontSendNotification
