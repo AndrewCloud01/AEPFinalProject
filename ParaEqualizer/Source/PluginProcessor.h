@@ -132,6 +132,7 @@ private:
     
     // Algorithm Values
     float fs;           // Sampling Frequency
+    
     float af1Freq,      af2Freq,        af3Freq;
     float af1Q,         af2Q,           af3Q;
     float af1GainDb,    af2GainDb,      af3GainDb;

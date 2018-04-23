@@ -368,17 +368,41 @@ void PluginAudioProcessorEditor::comboBoxChanged (ComboBox* comboBoxThatHasChang
 {
     //[UsercomboBoxChanged_Pre]
     //[/UsercomboBoxChanged_Pre]
+    
+    // COMBOBOX VALUES
+    // 0 = Low Shelf    (0)
+    // 1 = Peak         (0.2)
+    // 2 = High Shelf   (0.4)
+    // 3 = Lowpass      (0.6)
+    // 4 = Highpass     (0.8)
 
     if (comboBoxThatHasChanged == f1TypeComboBox)
     {
         //[UserComboBoxCode_f1TypeComboBox] -- combo box handling code here
         
         // DISPLAY COMBO BOX VALUES
-        //String alert = ("Selected ID: " + (String)comboBoxThatHasChanged->getSelectedId() + "\nItem Index: " + (String)comboBoxThatHasChanged->getSelectedItemIndex() +                     "\nNumItems: " + (String)comboBoxThatHasChanged->getNumItems());
-        //AlertWindow::showMessageBoxAsync (AlertWindow::InfoIcon, "Console Output", alert);
+        String alert = ("Selected ID: " + (String)comboBoxThatHasChanged->getSelectedId() + "\nItem Index: " + (String)comboBoxThatHasChanged->getSelectedItemIndex() +                     "\nNumItems: " + (String)comboBoxThatHasChanged->getNumItems());
+        AlertWindow::showMessageBoxAsync (AlertWindow::InfoIcon, "Console Output", alert);
         // END DISPLAY
         
-        processor.setParameterNotifyingHost(PluginAudioProcessor::Parameters::f1TypeParam,(float)comboBoxThatHasChanged->getSelectedItemIndex() / (float) comboBoxThatHasChanged->getNumItems());
+        // Send ComboBox values to processor
+        //processor.setParameterNotifyingHost(PluginAudioProcessor::Parameters::f1TypeParam,(float)comboBoxThatHasChanged->getSelectedItemIndex() / (float) comboBoxThatHasChanged->getNumItems());
+        
+        // COMBO BOX TEST
+        switch(comboBoxThatHasChanged->getSelectedItemIndex())
+        {
+            case 0:     // 1st Item
+                processor.setParameterNotifyingHost(PluginAudioProcessor::Parameters::f1TypeParam, 0);  // Make Low shelf
+                break;
+                
+            case 1:     // 3rd Item
+                processor.setParameterNotifyingHost(PluginAudioProcessor::Parameters::f1TypeParam, 0.8);    // Make Highpass
+                break;
+                
+                
+            default:
+                break;
+        }
 
         
         if (comboBoxThatHasChanged->getSelectedItemIndex() > 2) {
@@ -409,10 +433,41 @@ void PluginAudioProcessorEditor::comboBoxChanged (ComboBox* comboBoxThatHasChang
     // Group 2
     else if (comboBoxThatHasChanged == f2TypeComboBox)
     {
-        //[UserComboBoxCode_f2TypeComboBox] -- add your combo box handling code here..
+        //[UserComboBoxCode_f2TypeComboBox]
+        
+        // Info Sent values:
+        // 0   = Low Shelf
+        // 0.2 = Peak
+        // 0.4 = High Shelf
+        // 0.6 = Lowpass
+        // 0.8 = Highpass
+        
+        float infoSent =(float)comboBoxThatHasChanged->getSelectedItemIndex() / (float) comboBoxThatHasChanged->getNumItems();  // Info sent to processor
+        
+        String alert = ("Selected ID: " + (String)comboBoxThatHasChanged->getSelectedId() + "\nItem Index: " + (String)comboBoxThatHasChanged->getSelectedItemIndex() +                     "\nNumItems: " + (String)comboBoxThatHasChanged->getNumItems() + "\nInfo Sent: " + (String)infoSent);
+        AlertWindow::showMessageBoxAsync (AlertWindow::InfoIcon, "Console Output", alert);
 
+        
+        // ORIGINAL
         processor.setParameterNotifyingHost(PluginAudioProcessor::Parameters::f2TypeParam,(float)comboBoxThatHasChanged->getSelectedItemIndex() / (float) comboBoxThatHasChanged->getNumItems());
         
+        /*
+        // COMBO BOX TEST
+        switch(comboBoxThatHasChanged->getSelectedItemIndex())
+        {
+            case 0:     // 1st Item
+                processor.setParameterNotifyingHost(PluginAudioProcessor::Parameters::f2TypeParam, 0);  // Make Low Shelf
+                break;
+            
+            case 2:     // 3rd Item
+                processor.setParameterNotifyingHost(PluginAudioProcessor::Parameters::f2TypeParam, 0.4);  // Make High Shelf
+                break;
+                
+                
+            default:
+                break;
+        }
+         */
         
         if (comboBoxThatHasChanged->getSelectedItemIndex() > 2) {
             // if Highpass or lowpass
