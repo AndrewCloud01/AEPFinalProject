@@ -121,24 +121,22 @@ private:
     const float DEFAULT_A_F4_FREQ = 12000.f;
     const float DEFAULT_A_F5_FREQ = 15000.f;
     
-    
     const float DEFAULT_A_FILTER_Q = 0.71f;
     const float DEFAULT_A_FILTER_GAIN_DB = 0.f;
     const float DEFAULT_A_OUTPUT_GAIN = 1.f;
     
-    //const FilterType DEFAULT_A_F1_TYPE = FilterType::LowShelf;
-    //const FilterType DEFAULT_A_F1_TYPE = FilterType::HighPass;
-    const FilterType DEFAULT_A_F1_TYPE = FilterType::Peak;
+    // Filter Types:
+    //HighPass
+    //LowPass
+    //LowShelf
+    //HighShelf
+    //Peak
     
+    const FilterType DEFAULT_A_F1_TYPE = FilterType::LowShelf;
     const FilterType DEFAULT_A_F2_TYPE = FilterType::Peak;
-    
-    //const FilterType DEFAULT_A_F3_TYPE = FilterType::HighShelf;       
-    //const FilterType DEFAULT_A_F3_TYPE = FilterType::LowPass;
     const FilterType DEFAULT_A_F3_TYPE = FilterType::Peak;
-    
-    // NEW
     const FilterType DEFAULT_A_F4_TYPE = FilterType::Peak;
-    const FilterType DEFAULT_A_F5_TYPE = FilterType::Peak;
+    const FilterType DEFAULT_A_F5_TYPE = FilterType::HighShelf;
 
     const float TOTAL_NUM_FILTERS = (float) (int) FilterType::TotalNumFilters;
     
@@ -149,8 +147,6 @@ private:
     // NEW
     const float DEFAULT_U_F4_FREQ           = (DEFAULT_A_F4_FREQ - 20) / 19980;
     const float DEFAULT_U_F5_FREQ           = (DEFAULT_A_F5_FREQ - 20) / 19980;
-    
-    
     
     const float DEFAULT_U_FILTER_Q          = (DEFAULT_A_FILTER_Q - 0.1f) / 9.9f;
     const float DEFAULT_U_FILTER_GAIN_DB    = 0.5f;

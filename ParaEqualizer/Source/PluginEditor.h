@@ -56,9 +56,6 @@ public:
     void sliderValueChanged (Slider* sliderThatWasMoved);
     void comboBoxChanged (ComboBox* comboBoxThatHasChanged);
     
-    
-
- 
 private:
     //[UserVariables]   -- variables in this section.
 

@@ -28,8 +28,6 @@
 PluginAudioProcessorEditor::PluginAudioProcessorEditor (PluginAudioProcessor& p)
     : AudioProcessorEditor (&p), processor (p)
 {
-
-    
     addAndMakeVisible (f1Group = new GroupComponent ("Band1 Group",
                                                      TRANS("Band1")));
     f1Group->setColour (GroupComponent::outlineColourId, Colour (0xffbbbbbb));
@@ -37,6 +35,7 @@ PluginAudioProcessorEditor::PluginAudioProcessorEditor (PluginAudioProcessor& p)
 
     addAndMakeVisible (f1FreqSlider = new Slider ("Band1 Frequency"));
     f1FreqSlider->setRange (20, 20000, 0);
+    f1FreqSlider->setSkewFactor(0.5);   // Skew for logarithmic
     f1FreqSlider->setSliderStyle (Slider::LinearHorizontal);
     f1FreqSlider->setTextBoxStyle (Slider::TextBoxBelow, false, 80, 20);
     f1FreqSlider->addListener (this);
@@ -66,6 +65,7 @@ PluginAudioProcessorEditor::PluginAudioProcessorEditor (PluginAudioProcessor& p)
 
     addAndMakeVisible (f2FreqSlider = new Slider ("Band2 Frequency"));
     f2FreqSlider->setRange (20, 20000, 0);
+    f2FreqSlider->setSkewFactor(0.5);   // Set Skew for Logarithmic
     f2FreqSlider->setSliderStyle (Slider::LinearHorizontal);
     f2FreqSlider->setTextBoxStyle (Slider::TextBoxBelow, false, 80, 20);
     f2FreqSlider->addListener (this);
@@ -90,6 +90,7 @@ PluginAudioProcessorEditor::PluginAudioProcessorEditor (PluginAudioProcessor& p)
 
     addAndMakeVisible (f3FreqSlider = new Slider ("Band3 Frequency"));
     f3FreqSlider->setRange (20, 20000, 0);
+    f3FreqSlider->setSkewFactor(0.5);   // Set Skew for Logarithmic
     f3FreqSlider->setSliderStyle (Slider::LinearHorizontal);
     f3FreqSlider->setTextBoxStyle (Slider::TextBoxBelow, false, 80, 20);
     f3FreqSlider->addListener (this);
@@ -114,6 +115,7 @@ PluginAudioProcessorEditor::PluginAudioProcessorEditor (PluginAudioProcessor& p)
     
     addAndMakeVisible (f4FreqSlider = new Slider ("Band4 Frequency"));
     f4FreqSlider->setRange (20, 20000, 0);
+    f4FreqSlider->setSkewFactor(0.5);       // Set skew logarithmic
     f4FreqSlider->setSliderStyle (Slider::LinearHorizontal);
     f4FreqSlider->setTextBoxStyle (Slider::TextBoxBelow, false, 80, 20);
     f4FreqSlider->addListener (this);
@@ -138,6 +140,7 @@ PluginAudioProcessorEditor::PluginAudioProcessorEditor (PluginAudioProcessor& p)
     
     addAndMakeVisible (f5FreqSlider = new Slider ("Band5 Frequency"));
     f5FreqSlider->setRange (20, 20000, 0);
+    f5FreqSlider->setSkewFactor(0.5);       // Set skew logarithmic
     f5FreqSlider->setSliderStyle (Slider::LinearHorizontal);
     f5FreqSlider->setTextBoxStyle (Slider::TextBoxBelow, false, 80, 20);
     f5FreqSlider->addListener (this);
@@ -154,17 +157,14 @@ PluginAudioProcessorEditor::PluginAudioProcessorEditor (PluginAudioProcessor& p)
     f5QSlider->setTextBoxStyle (Slider::TextBoxBelow, false, 80, 20);
     f5QSlider->addListener (this);
     
-    
+    // COMBO BOX VALUES
     addAndMakeVisible (f1TypeComboBox = new ComboBox ("Band1 Type"));
     f1TypeComboBox->setEditableText (false);
     f1TypeComboBox->setJustificationType (Justification::centred);
     f1TypeComboBox->setTextWhenNothingSelected (TRANS("Band Type"));
     f1TypeComboBox->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
     f1TypeComboBox->addItem (TRANS("Low Shelf"), 1);
-    f1TypeComboBox->addItem (TRANS("Peak"), 2);
-    f1TypeComboBox->addItem (TRANS("High Shelf"), 3);
-    f1TypeComboBox->addItem (TRANS("LowPass"), 4);
-    f1TypeComboBox->addItem (TRANS("HighPass"), 5);
+    f1TypeComboBox->addItem (TRANS("HighPass"), 2); // original value = 5
     f1TypeComboBox->addListener (this);
 
     addAndMakeVisible (f2TypeComboBox = new ComboBox ("Band2 Type"));
@@ -172,24 +172,16 @@ PluginAudioProcessorEditor::PluginAudioProcessorEditor (PluginAudioProcessor& p)
     f2TypeComboBox->setJustificationType (Justification::centred);
     f2TypeComboBox->setTextWhenNothingSelected (TRANS("Band Type"));
     f2TypeComboBox->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
-    f2TypeComboBox->addItem (TRANS("Low Shelf"), 1);
-    f2TypeComboBox->addItem (TRANS("Peak"), 2);         // Original ID 2
-    f2TypeComboBox->addItem (TRANS("High Shelf"), 3);   // Original ID 3
-    f2TypeComboBox->addItem (TRANS("LowPass"), 4);      // Original ID 4
-    f2TypeComboBox->addItem (TRANS("HighPass"), 5);
+    f2TypeComboBox->addItem (TRANS("Peak"), 1);         // Original ID 2
+    //f2TypeComboBox->addItem (TRANS("Low Shelf"), 2);
     f2TypeComboBox->addListener (this);
 
-    
     addAndMakeVisible (f3TypeComboBox = new ComboBox ("Band3 Type"));
     f3TypeComboBox->setEditableText (false);
     f3TypeComboBox->setJustificationType (Justification::centred);
     f3TypeComboBox->setTextWhenNothingSelected (TRANS("Band Type"));
     f3TypeComboBox->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
-    f3TypeComboBox->addItem (TRANS("Low Shelf"), 1);
-    f3TypeComboBox->addItem (TRANS("Peak"), 2);
-    f3TypeComboBox->addItem (TRANS("High Shelf"), 3);
-    f3TypeComboBox->addItem (TRANS("LowPass"), 4);
-    f3TypeComboBox->addItem (TRANS("HighPass"), 5);
+    f3TypeComboBox->addItem (TRANS("Peak"), 1);             // original 2
     f3TypeComboBox->addListener (this);
     
     // NEW
@@ -198,11 +190,8 @@ PluginAudioProcessorEditor::PluginAudioProcessorEditor (PluginAudioProcessor& p)
     f4TypeComboBox->setJustificationType (Justification::centred);
     f4TypeComboBox->setTextWhenNothingSelected (TRANS("Band Type"));
     f4TypeComboBox->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
-    f4TypeComboBox->addItem (TRANS("Low Shelf"), 1);
-    f4TypeComboBox->addItem (TRANS("Peak"), 2);
-    f4TypeComboBox->addItem (TRANS("High Shelf"), 3);
-    f4TypeComboBox->addItem (TRANS("LowPass"), 4);
-    f4TypeComboBox->addItem (TRANS("HighPass"), 5);
+    f4TypeComboBox->addItem (TRANS("Peak"), 1);
+    //f4TypeComboBox->addItem (TRANS("High Shelf"), 2);
     f4TypeComboBox->addListener (this);
     
     // GROUP 5
@@ -211,11 +200,8 @@ PluginAudioProcessorEditor::PluginAudioProcessorEditor (PluginAudioProcessor& p)
     f5TypeComboBox->setJustificationType (Justification::centred);
     f5TypeComboBox->setTextWhenNothingSelected (TRANS("Band Type"));
     f5TypeComboBox->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
-    f5TypeComboBox->addItem (TRANS("Low Shelf"), 1);
-    f5TypeComboBox->addItem (TRANS("Peak"), 2);
-    f5TypeComboBox->addItem (TRANS("High Shelf"), 3);
-    f5TypeComboBox->addItem (TRANS("LowPass"), 4);
-    f5TypeComboBox->addItem (TRANS("HighPass"), 5);
+    f5TypeComboBox->addItem (TRANS("High Shelf"), 1);       // original = 3
+    f5TypeComboBox->addItem (TRANS("LowPass"), 2);          // original = 4
     f5TypeComboBox->addListener (this);
     
     
@@ -238,9 +224,11 @@ PluginAudioProcessorEditor::PluginAudioProcessorEditor (PluginAudioProcessor& p)
     outputGainDbSlider->setTextValueSuffix("dB");
 
     // Instantiate Filter Types
-    //f1TypeComboBox->setSelectedId(1);       // LS
-    //f2TypeComboBox->setSelectedId(2);       // Peak
-    //f3TypeComboBox->setSelectedId(3);       // HS
+    f1TypeComboBox->setSelectedId(1);       // LS
+    f2TypeComboBox->setSelectedId(1);       // Peak
+    f3TypeComboBox->setSelectedId(1);       // Peak
+    f4TypeComboBox->setSelectedId(1);       // Peak
+    f5TypeComboBox->setSelectedId(1);       // HS
 
     f1FreqSlider->setDoubleClickReturnValue(true, 800.f);
     f2FreqSlider->setDoubleClickReturnValue(true, 2000.f);
@@ -262,7 +250,6 @@ PluginAudioProcessorEditor::PluginAudioProcessorEditor (PluginAudioProcessor& p)
     //NEW
     f4GainDbSlider->setDoubleClickReturnValue(true, 0.f);
     f5GainDbSlider->setDoubleClickReturnValue(true, 0.f);
-    
     
     outputGainDbSlider->setDoubleClickReturnValue(true, 0.f);
     //[/UserPreSize]
@@ -489,27 +476,27 @@ void PluginAudioProcessorEditor::sliderValueChanged (Slider* sliderThatWasMoved)
     {
         //[UserSliderCode_f4FreqSlider] -- slider handling code here
         processor.setParameterNotifyingHost(
-                                            PluginAudioProcessor::Parameters::f4FreqParam,
-                                            (sliderThatWasMoved->getValue() - 20) / 19980
-                                            );
+            PluginAudioProcessor::Parameters::f4FreqParam,
+            (sliderThatWasMoved->getValue() - 20) / 19980
+        );
         //[/UserSliderCode_f4FreqSlider]
     }
     else if (sliderThatWasMoved == f4GainDbSlider)
     {
         //[UserSliderCode_f4GainDbSlider] -- slider handling code here
         processor.setParameterNotifyingHost(
-                                            PluginAudioProcessor::Parameters::f4GainParam,
-                                            (sliderThatWasMoved->getValue() + 24) / 48
-                                            );
+            PluginAudioProcessor::Parameters::f4GainParam,
+            (sliderThatWasMoved->getValue() + 24) / 48
+        );
         //[/UserSliderCode_f4GainDbSlider]
     }
     else if (sliderThatWasMoved == f4QSlider)
     {
         //[UserSliderCode_f4QSlider] -- slider handling code here
         processor.setParameterNotifyingHost(
-                                            PluginAudioProcessor::Parameters::f4QParam,
-                                            (sliderThatWasMoved->getValue() - 0.1f) / 9.9f
-                                            );
+            PluginAudioProcessor::Parameters::f4QParam,
+            (sliderThatWasMoved->getValue() - 0.1f) / 9.9f
+        );
         //[/UserSliderCode_f4QSlider]
     }
     
@@ -518,28 +505,28 @@ void PluginAudioProcessorEditor::sliderValueChanged (Slider* sliderThatWasMoved)
     {
         //[UserSliderCode_f5FreqSlider] -- slider handling code here
         processor.setParameterNotifyingHost(
-                                            PluginAudioProcessor::Parameters::f5FreqParam,
-                                            (sliderThatWasMoved->getValue() - 20) / 19980
-                                            );
+            PluginAudioProcessor::Parameters::f5FreqParam,
+            (sliderThatWasMoved->getValue() - 20) / 19980
+        );
         //[/UserSliderCode_f5FreqSlider]
     }
     else if (sliderThatWasMoved == f5GainDbSlider)
     {
         //[UserSliderCode_f5GainDbSlider] -- slider handling code here
         processor.setParameterNotifyingHost(
-                                            PluginAudioProcessor::Parameters::f5GainParam,
-                                            (sliderThatWasMoved->getValue() + 24) / 48
-                                            );
+            PluginAudioProcessor::Parameters::f5GainParam,
+            (sliderThatWasMoved->getValue() + 24) / 48
+        );
         //[/UserSliderCode_f5GainDbSlider]
     }
     else if (sliderThatWasMoved == f5QSlider)
     {
         //[UserSliderCode_f5QSlider] -- slider handling code here
         processor.setParameterNotifyingHost(
-                                            PluginAudioProcessor::Parameters::f5QParam,
-                                            (sliderThatWasMoved->getValue() - 0.1f) / 9.9f
-                                            );
-        //[/UserSliderCode_f3QSlider]
+            PluginAudioProcessor::Parameters::f5QParam,
+            (sliderThatWasMoved->getValue() - 0.1f) / 9.9f
+        );
+        //[/UserSliderCode_f5QSlider]
     }
     
     
@@ -563,55 +550,31 @@ void PluginAudioProcessorEditor::comboBoxChanged (ComboBox* comboBoxThatHasChang
 
     if (comboBoxThatHasChanged == f1TypeComboBox)
     {
-        //[UserComboBoxCode_f1TypeComboBox] -- combo box handling code here
+        //[UserComboBoxCode_f1TypeComboBox]
         
         // DISPLAY COMBO BOX VALUES
-        String alert = ("Selected ID: " + (String)comboBoxThatHasChanged->getSelectedId() + "\nItem Index: " + (String)comboBoxThatHasChanged->getSelectedItemIndex() +                     "\nNumItems: " + (String)comboBoxThatHasChanged->getNumItems());
-        AlertWindow::showMessageBoxAsync (AlertWindow::InfoIcon, "Console Output", alert);
+        //String alert = ("Selected ID: " + (String)comboBoxThatHasChanged->getSelectedId() + "\nItem Index: " + (String)comboBoxThatHasChanged->getSelectedItemIndex() +                     "\nNumItems: " + (String)comboBoxThatHasChanged->getNumItems());
+        //AlertWindow::showMessageBoxAsync (AlertWindow::InfoIcon, "Console Output", alert);
         // END DISPLAY
         
-        // Send ComboBox values to processor
-        //processor.setParameterNotifyingHost(PluginAudioProcessor::Parameters::f1TypeParam,(float)comboBoxThatHasChanged->getSelectedItemIndex() / (float) comboBoxThatHasChanged->getNumItems());
-        
-        // COMBO BOX TEST
+        // COMBO BOX SWITCH
         switch(comboBoxThatHasChanged->getSelectedItemIndex())
         {
             case 0:     // 1st Item
                 processor.setParameterNotifyingHost(PluginAudioProcessor::Parameters::f1TypeParam, 0);  // Make Low shelf
+                f1GainDbSlider->setEnabled(true);
+                f1QSlider->setEnabled(true);
                 break;
-                
-            case 1:     // 3rd Item
+            case 1:     // 2nd Item
                 processor.setParameterNotifyingHost(PluginAudioProcessor::Parameters::f1TypeParam, 0.8);    // Make Highpass
+                f1GainDbSlider->setEnabled(false);
+                f1QSlider->setValue(0.707f);      // RESET TO 0.7
+                f1QSlider->setEnabled(false);
                 break;
-                
-                
             default:
                 break;
         }
-
         
-        if (comboBoxThatHasChanged->getSelectedItemIndex() > 2) {
-            // if Highpass or lowpass
-            f1GainDbSlider->setEnabled(false);
-            
-            f1QSlider->setValue(0.707f);     // RESET TO 0.7
-            f1QSlider->setEnabled(false);    // SPRINT 2
-        }
-        else {
-            f1GainDbSlider->setEnabled(true);
-            f1QSlider->setEnabled(true);    // SPRINT 2
-        }
-        
-        // Q Slider for Shelves
-        if (comboBoxThatHasChanged->getSelectedItemIndex() == 0 || comboBoxThatHasChanged->getSelectedItemIndex() == 2){
-            // If highshelf or lowshelf
-            f1QSlider->setValue(0.707f);      // RESET TO 0.7
-            f1QSlider->setEnabled(false);
-        }
-        else{
-            // Do nothing
-        }
-         
         //[/UserComboBoxCode_f1TypeComboBox]
     }
     
@@ -627,95 +590,46 @@ void PluginAudioProcessorEditor::comboBoxChanged (ComboBox* comboBoxThatHasChang
         // 0.6 = Lowpass
         // 0.8 = Highpass
         
-        float infoSent =(float)comboBoxThatHasChanged->getSelectedItemIndex() / (float) comboBoxThatHasChanged->getNumItems();  // Info sent to processor
-        
-        String alert = ("Selected ID: " + (String)comboBoxThatHasChanged->getSelectedId() + "\nItem Index: " + (String)comboBoxThatHasChanged->getSelectedItemIndex() +                     "\nNumItems: " + (String)comboBoxThatHasChanged->getNumItems() + "\nInfo Sent: " + (String)infoSent);
-        AlertWindow::showMessageBoxAsync (AlertWindow::InfoIcon, "Console Output", alert);
-
-        
-        // ORIGINAL
-        processor.setParameterNotifyingHost(PluginAudioProcessor::Parameters::f2TypeParam,(float)comboBoxThatHasChanged->getSelectedItemIndex() / (float) comboBoxThatHasChanged->getNumItems());
-        
-        /*
-        // COMBO BOX TEST
         switch(comboBoxThatHasChanged->getSelectedItemIndex())
         {
             case 0:     // 1st Item
-                processor.setParameterNotifyingHost(PluginAudioProcessor::Parameters::f2TypeParam, 0);  // Make Low Shelf
+                processor.setParameterNotifyingHost(PluginAudioProcessor::Parameters::f2TypeParam, 0.2);  // Make Peak
                 break;
-            
-            case 2:     // 3rd Item
-                processor.setParameterNotifyingHost(PluginAudioProcessor::Parameters::f2TypeParam, 0.4);  // Make High Shelf
-                break;
-                
-                
+            //case 1:     // 2nd Item
+                //processor.setParameterNotifyingHost(PluginAudioProcessor::Parameters::f2TypeParam, 0);    // Make Low Shelf
+                //break;
             default:
                 break;
         }
-         */
         
-        if (comboBoxThatHasChanged->getSelectedItemIndex() > 2) {
-            // if Highpass or lowpass
-            f2GainDbSlider->setEnabled(false);
-            
-            f2QSlider->setValue(0.707f);     // RESET TO 0.7
-            f2QSlider->setEnabled(false);    // SPRINT 2 Demonstration
-        }
-        else {
-            f2GainDbSlider->setEnabled(true);
-            f2QSlider->setEnabled(true);    // SPRINT 2 Demonstration
-        }
-        
-        // Q Slider for Shelves
-        if (comboBoxThatHasChanged->getSelectedItemIndex() == 0 || comboBoxThatHasChanged->getSelectedItemIndex() == 2){
-            // If highshelf or lowshelf
-            f2QSlider->setValue(0.707f);      // RESET TO 0.7
-            f2QSlider->setEnabled(false);
-        }
-        else{
-            // Do nothing
-        }
+        // ORIGINAL
+        //processor.setParameterNotifyingHost(PluginAudioProcessor::Parameters::f2TypeParam,(float)comboBoxThatHasChanged->getSelectedItemIndex() / (float) comboBoxThatHasChanged->getNumItems());
         
         //[/UserComboBoxCode_f2TypeComboBox]
     }
     
     // Group 3
-    
     else if (comboBoxThatHasChanged == f3TypeComboBox)
     {
-        //[UserComboBoxCode_f3TypeComboBox] -- combo box handling code here
-        processor.setParameterNotifyingHost(PluginAudioProcessor::Parameters::f3TypeParam,(float)comboBoxThatHasChanged->getSelectedItemIndex() / (float) comboBoxThatHasChanged->getNumItems());
+        //[UserComboBoxCode_f3TypeComboBox]
+        //processor.setParameterNotifyingHost(PluginAudioProcessor::Parameters::f3TypeParam,(float)comboBoxThatHasChanged->getSelectedItemIndex() / (float) comboBoxThatHasChanged->getNumItems());
+        
+        switch(comboBoxThatHasChanged->getSelectedItemIndex())
+        {
+            case 0:     // 1st Item
+                processor.setParameterNotifyingHost(PluginAudioProcessor::Parameters::f3TypeParam, 0.2);  // Make PEAK
+                break;
+            default:
+                break;
+        }
 
-        if (comboBoxThatHasChanged->getSelectedItemIndex() > 2) {
-            // if Highpass or lowpass
-            f3GainDbSlider->setEnabled(false);
-            
-            f3QSlider->setValue(0.707f);     // RESET TO 0.7
-            f3QSlider->setEnabled(false);    // SPRINT 2 Demonstration
-        }
-        else {
-            f3GainDbSlider->setEnabled(true);
-            f3QSlider->setEnabled(true);    // SPRINT 2
-        }
-        
-        // Q Slider for Shelves
-        if (comboBoxThatHasChanged->getSelectedItemIndex() == 0 || comboBoxThatHasChanged->getSelectedItemIndex() == 2){
-            // If highshelf or lowshelf
-            f3QSlider->setValue(0.707f);      // RESET TO 0.7
-            f3QSlider->setEnabled(false);
-        }
-        else{
-            // Do nothing
-        }
-        
-        
         //[/UserComboBoxCode_f3TypeComboBox]
     }
     
     // Group 4
     else if (comboBoxThatHasChanged == f4TypeComboBox)
     {
-        //[UserComboBoxCode_f2TypeComboBox]
+        //[UserComboBoxCode_f4TypeComboBox]
         
         // Info Sent values:
         // 0   = Low Shelf
@@ -724,36 +638,17 @@ void PluginAudioProcessorEditor::comboBoxChanged (ComboBox* comboBoxThatHasChang
         // 0.6 = Lowpass
         // 0.8 = Highpass
         
-        float infoSent =(float)comboBoxThatHasChanged->getSelectedItemIndex() / (float) comboBoxThatHasChanged->getNumItems();  // Info sent to processor
-        
-        String alert = ("Selected ID: " + (String)comboBoxThatHasChanged->getSelectedId() + "\nItem Index: " + (String)comboBoxThatHasChanged->getSelectedItemIndex() +                     "\nNumItems: " + (String)comboBoxThatHasChanged->getNumItems() + "\nInfo Sent: " + (String)infoSent);
-        AlertWindow::showMessageBoxAsync (AlertWindow::InfoIcon, "Console Output", alert);
-        
-        
-        // ORIGINAL
-        processor.setParameterNotifyingHost(PluginAudioProcessor::Parameters::f4TypeParam,(float)comboBoxThatHasChanged->getSelectedItemIndex() / (float) comboBoxThatHasChanged->getNumItems());
-        
-        
-        if (comboBoxThatHasChanged->getSelectedItemIndex() > 2) {
-            // if Highpass or lowpass
-            f4GainDbSlider->setEnabled(false);
-            
-            f4QSlider->setValue(0.707f);     // RESET TO 0.7
-            f4QSlider->setEnabled(false);    // SPRINT 2 Demonstration
-        }
-        else {
-            f4GainDbSlider->setEnabled(true);
-            f4QSlider->setEnabled(true);    // SPRINT 2 Demonstration
-        }
-        
-        // Q Slider for Shelves
-        if (comboBoxThatHasChanged->getSelectedItemIndex() == 0 || comboBoxThatHasChanged->getSelectedItemIndex() == 2){
-            // If highshelf or lowshelf
-            f4QSlider->setValue(0.707f);      // RESET TO 0.7
-            f4QSlider->setEnabled(false);
-        }
-        else{
-            // Do nothing
+        //COMBO BOX
+        switch(comboBoxThatHasChanged->getSelectedItemIndex())
+        {
+            case 0:     // 1st Item
+                processor.setParameterNotifyingHost(PluginAudioProcessor::Parameters::f4TypeParam, 0.2);  // Make Peak
+                break;
+            //case 1:     // 2nd Item
+                //processor.setParameterNotifyingHost(PluginAudioProcessor::Parameters::f4TypeParam, 0.4);    // Make High shelf
+                //break;
+            default:
+                break;
         }
         
         //[/UserComboBoxCode_f2TypeComboBox]
@@ -771,36 +666,21 @@ void PluginAudioProcessorEditor::comboBoxChanged (ComboBox* comboBoxThatHasChang
         // 0.6 = Lowpass
         // 0.8 = Highpass
         
-        float infoSent =(float)comboBoxThatHasChanged->getSelectedItemIndex() / (float) comboBoxThatHasChanged->getNumItems();  // Info sent to processor
-        
-        String alert = ("Selected ID: " + (String)comboBoxThatHasChanged->getSelectedId() + "\nItem Index: " + (String)comboBoxThatHasChanged->getSelectedItemIndex() +                     "\nNumItems: " + (String)comboBoxThatHasChanged->getNumItems() + "\nInfo Sent: " + (String)infoSent);
-        AlertWindow::showMessageBoxAsync (AlertWindow::InfoIcon, "Console Output", alert);
-        
-        
-        // ORIGINAL
-        processor.setParameterNotifyingHost(PluginAudioProcessor::Parameters::f5TypeParam,(float)comboBoxThatHasChanged->getSelectedItemIndex() / (float) comboBoxThatHasChanged->getNumItems());
-        
-        
-        if (comboBoxThatHasChanged->getSelectedItemIndex() > 2) {
-            // if Highpass or lowpass
-            f5GainDbSlider->setEnabled(false);
-            
-            f5QSlider->setValue(0.707f);     // RESET TO 0.7
-            f5QSlider->setEnabled(false);    // SPRINT 2 Demonstration
-        }
-        else {
-            f5GainDbSlider->setEnabled(true);
-            f5QSlider->setEnabled(true);    // SPRINT 2 Demonstration
-        }
-        
-        // Q Slider for Shelves
-        if (comboBoxThatHasChanged->getSelectedItemIndex() == 0 || comboBoxThatHasChanged->getSelectedItemIndex() == 2){
-            // If highshelf or lowshelf
-            f5QSlider->setValue(0.707f);      // RESET TO 0.7
-            f5QSlider->setEnabled(false);
-        }
-        else{
-            // Do nothing
+        switch(comboBoxThatHasChanged->getSelectedItemIndex())
+        {
+            case 0:     // 1st Item
+                processor.setParameterNotifyingHost(PluginAudioProcessor::Parameters::f5TypeParam, 0.4);  // Make High shelf
+                f5GainDbSlider->setEnabled(true);
+                f5QSlider->setEnabled(true);
+                break;
+            case 1:     // 2nd Item
+                processor.setParameterNotifyingHost(PluginAudioProcessor::Parameters::f5TypeParam, 0.6);    // Make Lowpass
+                f5GainDbSlider->setEnabled(false);
+                f5QSlider->setValue(0.707f);      // RESET TO 0.7
+                f5QSlider->setEnabled(false);
+                break;
+            default:
+                break;
         }
         
         //[/UserComboBoxCode_f5TypeComboBox]
@@ -896,7 +776,7 @@ void PluginAudioProcessorEditor::timerCallback()
         dontSendNotification
     );
     
-    // Group 4
+    // Group 5
     f5FreqSlider->setValue(
         20 + (ourProcessor.uf5Freq * 19980),
         dontSendNotification

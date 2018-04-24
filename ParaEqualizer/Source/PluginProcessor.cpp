@@ -353,29 +353,29 @@ const String PluginAudioProcessor::getParameterName (int index)
 const String PluginAudioProcessor::getParameterText (int index)
 {
     switch (index) {
-        case outputGainParam:   return String((-24 + (uOutputGainDb) * 48), 1) + "db";
+        case outputGainParam:   return String((-24 + (uOutputGainDb) * 48), 1) + "dB";
         case f1FreqParam:       return String(af1Freq, 0) + "Hz";
         case f1QParam:          return String(af1Q, 2);
-        case f1GainParam:       return String(af1GainDb, 1) + "db";
+        case f1GainParam:       return String(af1GainDb, 1) + "dB";
         case f1TypeParam:       return filterTypeString(af1Type);
         case f2FreqParam:       return String(af2Freq, 0) + "Hz";
         case f2QParam:          return String(af2Q, 2);
-        case f2GainParam:       return String(af2GainDb, 1) + "db";
+        case f2GainParam:       return String(af2GainDb, 1) + "dB";
         case f2TypeParam:       return filterTypeString(af2Type);
         case f3FreqParam:       return String(af3Freq, 0) + "Hz";
         case f3QParam:          return String(af3Q, 2);
-        case f3GainParam:       return String(af3GainDb, 1) + "db";
+        case f3GainParam:       return String(af3GainDb, 1) + "dB";
         case f3TypeParam:       return filterTypeString(af3Type);
             
             // NEW
         case f4FreqParam:       return String(af4Freq, 0) + "Hz";
         case f4QParam:          return String(af4Q, 2);
-        case f4GainParam:       return String(af4GainDb, 1) + "db";
+        case f4GainParam:       return String(af4GainDb, 1) + "dB";
         case f4TypeParam:       return filterTypeString(af4Type);
             
         case f5FreqParam:       return String(af5Freq, 0) + "Hz";
         case f5QParam:          return String(af5Q, 2);
-        case f5GainParam:       return String(af5GainDb, 1) + "db";
+        case f5GainParam:       return String(af5GainDb, 1) + "dB";
         case f5TypeParam:       return filterTypeString(af5Type);
             
         default:                return String(getParameter(index), 2);
