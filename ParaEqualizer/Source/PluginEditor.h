@@ -84,14 +84,12 @@ private:
     ScopedPointer<Slider> f2FreqSlider;
     ScopedPointer<Slider> f2GainDbSlider;
     ScopedPointer<Slider> f2QSlider;
-    
-    
+
     ScopedPointer<GroupComponent> f3Group;
     ScopedPointer<Slider> f3FreqSlider;
     ScopedPointer<Slider> f3GainDbSlider;
     ScopedPointer<Slider> f3QSlider;
     
-    //NEW
     ScopedPointer<GroupComponent> f4Group;
     ScopedPointer<Slider> f4FreqSlider;
     ScopedPointer<Slider> f4GainDbSlider;
@@ -106,7 +104,6 @@ private:
     ScopedPointer<ComboBox> f1TypeComboBox;
     ScopedPointer<ComboBox> f2TypeComboBox;
     ScopedPointer<ComboBox> f3TypeComboBox;
-    // NEW
     ScopedPointer<ComboBox> f4TypeComboBox;
     ScopedPointer<ComboBox> f5TypeComboBox;
 

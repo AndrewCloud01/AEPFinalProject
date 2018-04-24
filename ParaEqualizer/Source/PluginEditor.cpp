@@ -28,6 +28,7 @@
 PluginAudioProcessorEditor::PluginAudioProcessorEditor (PluginAudioProcessor& p)
     : AudioProcessorEditor (&p), processor (p)
 {
+    // GROUP 1
     addAndMakeVisible (f1Group = new GroupComponent ("Band1 Group",
                                                      TRANS("Band1")));
     f1Group->setColour (GroupComponent::outlineColourId, Colour (0xffbbbbbb));
@@ -58,6 +59,7 @@ PluginAudioProcessorEditor::PluginAudioProcessorEditor (PluginAudioProcessor& p)
     outputGainDbSlider->setTextBoxStyle (Slider::TextBoxRight, false, 80, 20);
     outputGainDbSlider->addListener (this);
 
+    // GROUP 2
     addAndMakeVisible (f2Group = new GroupComponent ("Band2 Group",
                                                      TRANS("Band2")));
     f2Group->setColour (GroupComponent::outlineColourId, Colour (0xffbbbbbb));
@@ -82,7 +84,7 @@ PluginAudioProcessorEditor::PluginAudioProcessorEditor (PluginAudioProcessor& p)
     f2QSlider->setTextBoxStyle (Slider::TextBoxBelow, false, 80, 20);
     f2QSlider->addListener (this);
 
-    
+    // GROUP 3
     addAndMakeVisible (f3Group = new GroupComponent ("Band3 Group",
                                                      TRANS("Band3")));
     f3Group->setColour (GroupComponent::outlineColourId, Colour (0xffbbbbbb));
@@ -107,7 +109,7 @@ PluginAudioProcessorEditor::PluginAudioProcessorEditor (PluginAudioProcessor& p)
     f3QSlider->setTextBoxStyle (Slider::TextBoxBelow, false, 80, 20);
     f3QSlider->addListener (this);
     
-    // NEW
+    // GROUP 4
     addAndMakeVisible (f4Group = new GroupComponent ("Band4 Group",
                                                      TRANS("Band4")));
     f4Group->setColour (GroupComponent::outlineColourId, Colour (0xffbbbbbb));
@@ -132,7 +134,7 @@ PluginAudioProcessorEditor::PluginAudioProcessorEditor (PluginAudioProcessor& p)
     f4QSlider->setTextBoxStyle (Slider::TextBoxBelow, false, 80, 20);
     f4QSlider->addListener (this);
     
-    // Froup 5
+    // GROUP 5
     addAndMakeVisible (f5Group = new GroupComponent ("Band5 Group",
                                                      TRANS("Band5")));
     f5Group->setColour (GroupComponent::outlineColourId, Colour (0xffbbbbbb));
@@ -184,7 +186,6 @@ PluginAudioProcessorEditor::PluginAudioProcessorEditor (PluginAudioProcessor& p)
     f3TypeComboBox->addItem (TRANS("Peak"), 1);             // original 2
     f3TypeComboBox->addListener (this);
     
-    // NEW
     addAndMakeVisible (f4TypeComboBox = new ComboBox ("Band4 Type"));
     f4TypeComboBox->setEditableText (false);
     f4TypeComboBox->setJustificationType (Justification::centred);
@@ -194,7 +195,6 @@ PluginAudioProcessorEditor::PluginAudioProcessorEditor (PluginAudioProcessor& p)
     //f4TypeComboBox->addItem (TRANS("High Shelf"), 2);
     f4TypeComboBox->addListener (this);
     
-    // GROUP 5
     addAndMakeVisible (f5TypeComboBox = new ComboBox ("Band5 Type"));
     f5TypeComboBox->setEditableText (false);
     f5TypeComboBox->setJustificationType (Justification::centred);
@@ -204,20 +204,16 @@ PluginAudioProcessorEditor::PluginAudioProcessorEditor (PluginAudioProcessor& p)
     f5TypeComboBox->addItem (TRANS("LowPass"), 2);          // original = 4
     f5TypeComboBox->addListener (this);
     
-    
-    //[UserPreSize]
-    // Add any other settings not offered by GUI editor here, else they'll be deleted
+    // GUI TEXT
     f1FreqSlider->setTextValueSuffix("Hz");
     f2FreqSlider->setTextValueSuffix("Hz");
     f3FreqSlider->setTextValueSuffix("Hz");
-    // NEW
     f4FreqSlider->setTextValueSuffix("Hz");
     f5FreqSlider->setTextValueSuffix("Hz");
     
     f1GainDbSlider->setTextValueSuffix("dB");
     f2GainDbSlider->setTextValueSuffix("dB");
     f3GainDbSlider->setTextValueSuffix("dB");
-    //NEW
     f4GainDbSlider->setTextValueSuffix("dB");
     f5GainDbSlider->setTextValueSuffix("dB");
     
@@ -230,24 +226,22 @@ PluginAudioProcessorEditor::PluginAudioProcessorEditor (PluginAudioProcessor& p)
     f4TypeComboBox->setSelectedId(1);       // Peak
     f5TypeComboBox->setSelectedId(1);       // HS
 
+    // DOUBLE-CLICK RETURN VALUES
     f1FreqSlider->setDoubleClickReturnValue(true, 800.f);
     f2FreqSlider->setDoubleClickReturnValue(true, 2000.f);
     f3FreqSlider->setDoubleClickReturnValue(true, 8000.f);
-    //NEW
     f4FreqSlider->setDoubleClickReturnValue(true, 12000.f);
     f5FreqSlider->setDoubleClickReturnValue(true, 15000.f);
 
     f1QSlider->setDoubleClickReturnValue(true, 0.71f);
     f2QSlider->setDoubleClickReturnValue(true, 0.71f);
     f3QSlider->setDoubleClickReturnValue(true, 0.71f);
-    //NEW
     f4QSlider->setDoubleClickReturnValue(true, 0.71f);
     f5QSlider->setDoubleClickReturnValue(true, 0.71f);
 
     f1GainDbSlider->setDoubleClickReturnValue(true, 0.f);
     f2GainDbSlider->setDoubleClickReturnValue(true, 0.f);
     f3GainDbSlider->setDoubleClickReturnValue(true, 0.f);
-    //NEW
     f4GainDbSlider->setDoubleClickReturnValue(true, 0.f);
     f5GainDbSlider->setDoubleClickReturnValue(true, 0.f);
     
@@ -288,12 +282,11 @@ PluginAudioProcessorEditor::~PluginAudioProcessorEditor()
     f3GainDbSlider = nullptr;
     f3QSlider = nullptr;
     
-    //NEW
     f4Group = nullptr;
     f4FreqSlider = nullptr;
     f4GainDbSlider = nullptr;
     f4QSlider = nullptr;
-    //GROUP 5
+    
     f5Group = nullptr;
     f5FreqSlider = nullptr;
     f5GainDbSlider = nullptr;
@@ -345,7 +338,6 @@ void PluginAudioProcessorEditor::resized()
     f3GainDbSlider->setBounds (328, 56, 144, 40);
     f3QSlider->setBounds (328, 152, 144, 40);
     
-    //NEW
     f4Group->setBounds (480, 0, 160, 200);
     f4FreqSlider->setBounds (488, 104, 144, 40);
     f4GainDbSlider->setBounds (488, 56, 144, 40);
@@ -359,7 +351,6 @@ void PluginAudioProcessorEditor::resized()
     f1TypeComboBox->setBounds (16, 24, 128, 24);
     f2TypeComboBox->setBounds (176, 24, 128, 24);
     f3TypeComboBox->setBounds (336, 24, 128, 24);
-    //NEW
     f4TypeComboBox->setBounds (496, 24, 128, 24);
     f5TypeComboBox->setBounds (656, 24, 128, 24);
 
