@@ -36,7 +36,8 @@ PluginAudioProcessorEditor::PluginAudioProcessorEditor (PluginAudioProcessor& p)
 
     addAndMakeVisible (f1FreqSlider = new Slider ("Band1 Frequency"));
     f1FreqSlider->setRange (20, 20000, 0);
-    f1FreqSlider->setSkewFactor(0.5);   // Skew for logarithmic
+    f1FreqSlider->setSkewFactorFromMidPoint(1000.0);   // Skew for logarithmic
+    f1FreqSlider->setTextBoxIsEditable(true);
     f1FreqSlider->setSliderStyle (Slider::LinearHorizontal);
     f1FreqSlider->setTextBoxStyle (Slider::TextBoxBelow, false, 80, 20);
     f1FreqSlider->addListener (this);
@@ -67,7 +68,7 @@ PluginAudioProcessorEditor::PluginAudioProcessorEditor (PluginAudioProcessor& p)
 
     addAndMakeVisible (f2FreqSlider = new Slider ("Band2 Frequency"));
     f2FreqSlider->setRange (20, 20000, 0);
-    f2FreqSlider->setSkewFactor(0.5);   // Set Skew for Logarithmic
+    f2FreqSlider->setSkewFactorFromMidPoint(1000.0);   // Set Skew for Logarithmic
     f2FreqSlider->setSliderStyle (Slider::LinearHorizontal);
     f2FreqSlider->setTextBoxStyle (Slider::TextBoxBelow, false, 80, 20);
     f2FreqSlider->addListener (this);
@@ -92,7 +93,7 @@ PluginAudioProcessorEditor::PluginAudioProcessorEditor (PluginAudioProcessor& p)
 
     addAndMakeVisible (f3FreqSlider = new Slider ("Band3 Frequency"));
     f3FreqSlider->setRange (20, 20000, 0);
-    f3FreqSlider->setSkewFactor(0.5);   // Set Skew for Logarithmic
+    f3FreqSlider->setSkewFactorFromMidPoint(1000.0);   // Set Skew for Logarithmic
     f3FreqSlider->setSliderStyle (Slider::LinearHorizontal);
     f3FreqSlider->setTextBoxStyle (Slider::TextBoxBelow, false, 80, 20);
     f3FreqSlider->addListener (this);
@@ -117,7 +118,7 @@ PluginAudioProcessorEditor::PluginAudioProcessorEditor (PluginAudioProcessor& p)
     
     addAndMakeVisible (f4FreqSlider = new Slider ("Band4 Frequency"));
     f4FreqSlider->setRange (20, 20000, 0);
-    f4FreqSlider->setSkewFactor(0.5);       // Set skew logarithmic
+    f4FreqSlider->setSkewFactorFromMidPoint(1000.0);       // Set skew logarithmic
     f4FreqSlider->setSliderStyle (Slider::LinearHorizontal);
     f4FreqSlider->setTextBoxStyle (Slider::TextBoxBelow, false, 80, 20);
     f4FreqSlider->addListener (this);
@@ -142,7 +143,7 @@ PluginAudioProcessorEditor::PluginAudioProcessorEditor (PluginAudioProcessor& p)
     
     addAndMakeVisible (f5FreqSlider = new Slider ("Band5 Frequency"));
     f5FreqSlider->setRange (20, 20000, 0);
-    f5FreqSlider->setSkewFactor(0.5);       // Set skew logarithmic
+    f5FreqSlider->setSkewFactorFromMidPoint(1000.0);       // Set skew logarithmic
     f5FreqSlider->setSliderStyle (Slider::LinearHorizontal);
     f5FreqSlider->setTextBoxStyle (Slider::TextBoxBelow, false, 80, 20);
     f5FreqSlider->addListener (this);
@@ -205,19 +206,25 @@ PluginAudioProcessorEditor::PluginAudioProcessorEditor (PluginAudioProcessor& p)
     f5TypeComboBox->addListener (this);
     
     // GUI TEXT
-    f1FreqSlider->setTextValueSuffix("Hz");
-    f2FreqSlider->setTextValueSuffix("Hz");
-    f3FreqSlider->setTextValueSuffix("Hz");
-    f4FreqSlider->setTextValueSuffix("Hz");
-    f5FreqSlider->setTextValueSuffix("Hz");
+    f1FreqSlider->setTextValueSuffix(" Hz");
+    f2FreqSlider->setTextValueSuffix(" Hz");
+    f3FreqSlider->setTextValueSuffix(" Hz");
+    f4FreqSlider->setTextValueSuffix(" Hz");
+    f5FreqSlider->setTextValueSuffix(" Hz");
     
-    f1GainDbSlider->setTextValueSuffix("dB");
-    f2GainDbSlider->setTextValueSuffix("dB");
-    f3GainDbSlider->setTextValueSuffix("dB");
-    f4GainDbSlider->setTextValueSuffix("dB");
-    f5GainDbSlider->setTextValueSuffix("dB");
+    f1GainDbSlider->setTextValueSuffix(" dB");
+    f2GainDbSlider->setTextValueSuffix(" dB");
+    f3GainDbSlider->setTextValueSuffix(" dB");
+    f4GainDbSlider->setTextValueSuffix(" dB");
+    f5GainDbSlider->setTextValueSuffix(" dB");
     
-    outputGainDbSlider->setTextValueSuffix("dB");
+    f1QSlider->setTextValueSuffix(" (Q)");
+    f2QSlider->setTextValueSuffix(" (Q)");
+    f3QSlider->setTextValueSuffix(" (Q)");
+    f4QSlider->setTextValueSuffix(" (Q)");
+    f5QSlider->setTextValueSuffix(" (Q)");
+    
+    outputGainDbSlider->setTextValueSuffix(" dB");
 
     // Instantiate Filter Types
     f1TypeComboBox->setSelectedId(1);       // LS
@@ -255,6 +262,7 @@ PluginAudioProcessorEditor::PluginAudioProcessorEditor (PluginAudioProcessor& p)
     //[Constructor] Custom stuff
 
     // Uncomment to apply custom styling from PluginLookAndFeel
+    //LookAndFeel::setDefaultLookAndFeel(&otherLookAndFeel);
     //LookAndFeel::setDefaultLookAndFeel(&pluginLookAndFeel);
 
     startTimer (50);

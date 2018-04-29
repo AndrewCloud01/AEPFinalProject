@@ -68,6 +68,7 @@ private:
         return static_cast<PluginAudioProcessor&> (processor);
     }
 
+    //LookAndFeel_V1 otherLookAndFeel;
     //PluginLookAndFeel pluginLookAndFeel;
 
     //[/UserVariables]
