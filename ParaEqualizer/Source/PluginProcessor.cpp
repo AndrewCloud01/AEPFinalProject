@@ -529,13 +529,12 @@ void PluginAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& 
     
     float* leftChannel = buffer.getWritePointer(0);
     float* rightChannel = buffer.getWritePointer(1);
-    for (int i = 0; i < buffer.getNumSamples(); i++) {
+    for (int i = 0; i < buffer.getNumSamples(); i++)
+    {
+        // Cascaded Update Tick Through Bands
         leftChannel[i]  = aOutputGain * filterL5->tick(filterL4->tick(filterL3->tick(filterL2->tick(filterL1->tick(leftChannel[i])))));
         rightChannel[i] = aOutputGain * filterR5->tick(filterR4->tick(filterR3->tick(filterR2->tick(filterR1->tick(rightChannel[i])))));
-        /*
-        leftChannel[i]  = aOutputGain * filterL3->tick(filterL2->tick(filterL1->tick(leftChannel[i])));
-        rightChannel[i] = aOutputGain * filterR3->tick(filterR2->tick(filterR1->tick(rightChannel[i])));
-         */
+
     }
 }
 

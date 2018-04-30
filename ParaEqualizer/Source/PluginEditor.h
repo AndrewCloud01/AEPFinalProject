@@ -1,24 +1,23 @@
 /*
   ==============================================================================
 
-  This is an automatically generated GUI class created by the Introjucer!
+  This is an automatically generated GUI class created by the Projucer!
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
-  Created with Introjucer version: 3.1.0
+  Created with Projucer version: 5.1.1
 
   ------------------------------------------------------------------------------
 
-  The Introjucer is part of the JUCE library - "Jules' Utility Class Extensions"
-  Copyright 2004-13 by Raw Material Software Ltd.
+  The Projucer is part of the JUCE library - "Jules' Utility Class Extensions"
+  Copyright (c) 2015 - ROLI Ltd.
 
   ==============================================================================
 */
 
-#ifndef __JUCE_HEADER_419FC5D7D3F5212A__
-#define __JUCE_HEADER_419FC5D7D3F5212A__
+#pragma once
 
 //[Headers]     -- You can add your own extra header files here --
 #include "JuceHeader.h"
@@ -51,13 +50,15 @@ public:
     void timerCallback();
     //[/UserMethods]
 
-    void paint (Graphics& g);
-    void resized();
-    void sliderValueChanged (Slider* sliderThatWasMoved);
-    void comboBoxChanged (ComboBox* comboBoxThatHasChanged);
-    
+    void paint (Graphics& g) override;
+    void resized() override;
+    void sliderValueChanged (Slider* sliderThatWasMoved) override;
+    void comboBoxChanged (ComboBox* comboBoxThatHasChanged) override;
+
+
+
 private:
-    //[UserVariables]   -- variables in this section.
+    //[UserVariables]   -- You can add your own custom variables in this section.
 
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
@@ -78,43 +79,23 @@ private:
     ScopedPointer<Slider> f1FreqSlider;
     ScopedPointer<Slider> f1GainDbSlider;
     ScopedPointer<Slider> f1QSlider;
-    
     ScopedPointer<Slider> outputGainDbSlider;
-    
     ScopedPointer<GroupComponent> f2Group;
     ScopedPointer<Slider> f2FreqSlider;
     ScopedPointer<Slider> f2GainDbSlider;
     ScopedPointer<Slider> f2QSlider;
-
     ScopedPointer<GroupComponent> f3Group;
     ScopedPointer<Slider> f3FreqSlider;
     ScopedPointer<Slider> f3GainDbSlider;
     ScopedPointer<Slider> f3QSlider;
-    
-    ScopedPointer<GroupComponent> f4Group;
-    ScopedPointer<Slider> f4FreqSlider;
-    ScopedPointer<Slider> f4GainDbSlider;
-    ScopedPointer<Slider> f4QSlider;
-    
-    ScopedPointer<GroupComponent> f5Group;
-    ScopedPointer<Slider> f5FreqSlider;
-    ScopedPointer<Slider> f5GainDbSlider;
-    ScopedPointer<Slider> f5QSlider;
-    
-    
     ScopedPointer<ComboBox> f1TypeComboBox;
     ScopedPointer<ComboBox> f2TypeComboBox;
     ScopedPointer<ComboBox> f3TypeComboBox;
-    ScopedPointer<ComboBox> f4TypeComboBox;
-    ScopedPointer<ComboBox> f5TypeComboBox;
-
-    
 
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PluginAudioProcessorEditor)
 };
 
+//[EndFile] You can add extra defines here...
 //[/EndFile]
-
-#endif   // __JUCE_HEADER_419FC5D7D3F5212A__
