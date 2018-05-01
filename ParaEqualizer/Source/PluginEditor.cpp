@@ -633,15 +633,15 @@ void PluginAudioProcessorEditor::comboBoxChanged (ComboBox* comboBoxThatHasChang
         switch(comboBoxThatHasChanged->getSelectedItemIndex())
         {
             case 0:     // 1st Item
-                processor.setParameterNotifyingHost(PluginAudioProcessor::Parameters::f1TypeParam, 0.4);  // Make Low shelf
-                f1GainDbSlider->setEnabled(true);
-                f1QSlider->setEnabled(true);
+                processor.setParameterNotifyingHost(PluginAudioProcessor::Parameters::f5TypeParam, 0.4);  // Make Low shelf
+                f5GainDbSlider->setEnabled(true);
+                f5QSlider->setEnabled(true);
                 break;
             case 1:     // 2nd Item
-                processor.setParameterNotifyingHost(PluginAudioProcessor::Parameters::f1TypeParam, 0.6);    // Make Highpass
-                f1GainDbSlider->setEnabled(false);
-                f1QSlider->setValue(0.707f);      // RESET TO 0.7
-                f1QSlider->setEnabled(false);
+                processor.setParameterNotifyingHost(PluginAudioProcessor::Parameters::f5TypeParam, 0.6);    // Make Highpass
+                f5GainDbSlider->setEnabled(false);
+                f5QSlider->setValue(0.707f);      // RESET TO 0.7
+                f5QSlider->setEnabled(false);
                 break;
             default:
                 break;
