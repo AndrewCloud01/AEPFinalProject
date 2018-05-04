@@ -56,10 +56,6 @@
       <FILE id="EDTkOm" name="PluginEditor.cpp" compile="1" resource="0"
             file="Source/PluginEditor.cpp"/>
       <FILE id="ZSITXB" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
-      <FILE id="XhYm67" name="PluginLookAndFeel.cpp" compile="1" resource="0"
-            file="Source/PluginLookAndFeel.cpp"/>
-      <FILE id="qER4Wh" name="PluginLookAndFeel.h" compile="0" resource="0"
-            file="Source/PluginLookAndFeel.h"/>
       <FILE id="c4t7Un" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="DNnKlo" name="PluginProcessor.h" compile="0" resource="0"
