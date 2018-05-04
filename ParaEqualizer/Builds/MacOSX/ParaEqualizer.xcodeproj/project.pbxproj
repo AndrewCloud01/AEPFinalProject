@@ -72,14 +72,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		2C6EB1DA209C42540013D499 /* PBXContainerItemProxy */ = {
+		2C6EB1E4209C480B0013D499 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FA0280A8C6BAC1FAAFA34EAE /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = F4787DA9BD8BF3D1DC6A5B4B;
 			remoteInfo = "ParaEqualizer - VST";
 		};
-		2C6EB1DB209C42540013D499 /* PBXContainerItemProxy */ = {
+		2C6EB1E5209C480B0013D499 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FA0280A8C6BAC1FAAFA34EAE /* Project object */;
 			proxyType = 1;
@@ -560,12 +560,12 @@
 		042C1C66226F603960DFA972 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 86DF04796E921BE8F464B4E7 /* ParaEqualizer - Shared Code */;
-			targetProxy = 2C6EB1DB209C42540013D499 /* PBXContainerItemProxy */;
+			targetProxy = 2C6EB1E5209C480B0013D499 /* PBXContainerItemProxy */;
 		};
 		A870121E723E1DC61E215593 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = F4787DA9BD8BF3D1DC6A5B4B /* ParaEqualizer - VST */;
-			targetProxy = 2C6EB1DA209C42540013D499 /* PBXContainerItemProxy */;
+			targetProxy = 2C6EB1E4209C480B0013D499 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

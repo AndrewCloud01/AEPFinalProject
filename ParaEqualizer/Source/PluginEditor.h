@@ -21,7 +21,6 @@
 // Headers
 #include "JuceHeader.h"
 #include "PluginProcessor.h"
-#include "PluginLookAndFeel.h"
 //[/Headers]
 
 
@@ -45,7 +44,7 @@ public:
     ~PluginAudioProcessorEditor();
 
     //==============================================================================
-    //[UserMethods]     -- You can add your own custom methods in this section.
+    //[UserMethods]     -- 
     void timerCallback();
     //[/UserMethods]
 
@@ -57,7 +56,7 @@ public:
 
 
 private:
-    //[UserVariables]   -- You can add your own custom variables in this section.
+    //[UserVariables]   --
 
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
@@ -108,5 +107,5 @@ private:
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PluginAudioProcessorEditor)
 };
 
-//[EndFile] You can add extra defines here...
+//[EndFile]
 //[/EndFile]

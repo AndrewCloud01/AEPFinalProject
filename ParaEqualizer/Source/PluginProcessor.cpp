@@ -94,12 +94,10 @@ float PluginAudioProcessor::getParameter (int index)                    // Must 
         case f3GainParam:       return uf3GainDb;
         case f3QParam:          return uf3Q;
         case f3TypeParam:       return uf3Type;
-            //NEW
         case f4FreqParam:       return uf4Freq;
         case f4GainParam:       return uf4GainDb;
         case f4QParam:          return uf4Q;
         case f4TypeParam:       return uf4Type;
-            
         case f5FreqParam:       return uf5Freq;
         case f5GainParam:       return uf5GainDb;
         case f5QParam:          return uf5Q;
