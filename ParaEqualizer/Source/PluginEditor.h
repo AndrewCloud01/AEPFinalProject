@@ -18,8 +18,7 @@
 */
 
 #pragma once
-
-//[Headers]     -- You can add your own extra header files here --
+// Headers
 #include "JuceHeader.h"
 #include "PluginProcessor.h"
 #include "PluginLookAndFeel.h"
@@ -70,7 +69,6 @@ private:
     }
 
     //LookAndFeel_V1 otherLookAndFeel;
-    //PluginLookAndFeel pluginLookAndFeel;
 
     //[/UserVariables]
 

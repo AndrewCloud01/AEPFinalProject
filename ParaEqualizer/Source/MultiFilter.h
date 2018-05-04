@@ -33,7 +33,7 @@ public:
 private:
     float fs;
     FilterType fType;
-    stk::BiQuad filter;
+    stk::BiQuad filter;     // Made from STK Lite available from ccrma's website
     
     float K, V, D;
     float A, w0, alpha, cos_w0, sin_w0;

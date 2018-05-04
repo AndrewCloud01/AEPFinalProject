@@ -84,8 +84,6 @@ public:
         f3GainParam,
         f3QParam,
         f3TypeParam,
-        
-        // NEW
         f4FreqParam,
         f4GainParam,
         f4QParam,
@@ -116,8 +114,6 @@ private:
     const float DEFAULT_A_F1_FREQ = 800.f;
     const float DEFAULT_A_F2_FREQ = 2000.f;
     const float DEFAULT_A_F3_FREQ = 8000.f;
-    
-    // NEW
     const float DEFAULT_A_F4_FREQ = 12000.f;
     const float DEFAULT_A_F5_FREQ = 15000.f;
     
@@ -144,7 +140,6 @@ private:
     const float DEFAULT_U_F1_FREQ           = (DEFAULT_A_F1_FREQ - 20) / 19980;
     const float DEFAULT_U_F2_FREQ           = (DEFAULT_A_F2_FREQ - 20) / 19980;
     const float DEFAULT_U_F3_FREQ           = (DEFAULT_A_F3_FREQ - 20) / 19980;
-    // NEW
     const float DEFAULT_U_F4_FREQ           = (DEFAULT_A_F4_FREQ - 20) / 19980;
     const float DEFAULT_U_F5_FREQ           = (DEFAULT_A_F5_FREQ - 20) / 19980;
     
@@ -153,8 +148,6 @@ private:
     const float DEFAULT_U_F1_TYPE           = (float) (int) DEFAULT_A_F1_TYPE / (float) (int) FilterType::TotalNumFilters;
     const float DEFAULT_U_F2_TYPE           = (float) (int) DEFAULT_A_F2_TYPE / (float) (int) FilterType::TotalNumFilters;
     const float DEFAULT_U_F3_TYPE           = (float) (int) DEFAULT_A_F3_TYPE / (float) (int) FilterType::TotalNumFilters;
-    
-    // NEW
     const float DEFAULT_U_F4_TYPE           = (float) (int) DEFAULT_A_F4_TYPE / (float) (int) FilterType::TotalNumFilters;
     const float DEFAULT_U_F5_TYPE           = (float) (int) DEFAULT_A_F5_TYPE / (float) (int) FilterType::TotalNumFilters;
     

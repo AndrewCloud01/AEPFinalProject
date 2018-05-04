@@ -107,26 +107,6 @@ void MultiFilter::updateCoefficients() {
             a1 /= D;
             a2 /= D;
             filter.setCoefficients(b0, b1, b2, a1, a2);
-            
-//            // Peaking Filter
-//            // Frequecy is skewed in this equation!!! (Peak isn't provided freq)
-//            A = powf(10.f, dbGain/40.f);
-//            w0 = 2.f * M_PI * frequency / fs;
-//            alpha = sinf(w0)/(2.f * q);
-//            cos_w0 = cosf(w0);
-//            
-//            tmp1 =  1.f + alpha * A;
-//            tmp2 =  -2.f * cos_w0;
-//            tmp3 =  1.f - alpha * A;
-//            
-//            tmp4 =  1.f + alpha / A;
-//            tmp5 =  tmp2;
-//            tmp6 =  1.f - alpha / A;
-//            
-//            b0 = tmp1/tmp4; b1 = tmp2/tmp4; b2 = tmp3/tmp4;
-//            a1 = tmp5/tmp4; a2 = tmp6/tmp4;
-//            
-//            filter.setCoefficients(b0, b1, b2, a1, a2);
             break;
         
         case FilterType::LowPass:
@@ -184,7 +164,7 @@ void MultiFilter::updateSampleRate(float newSampleRate) {
 }
 
 float MultiFilter::tick(float sample) {
-    return filter.tick(sample);
+    return filter.tick(sample); // Pings buffers for new data
 }
 
 void MultiFilter::changeFilterType(FilterType type) {

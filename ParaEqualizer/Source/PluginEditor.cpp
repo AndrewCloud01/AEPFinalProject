@@ -771,8 +771,7 @@ void PluginAudioProcessorEditor::timerCallback()
 #if 0
 /*  -- Projucer information section --
 
-    This is where the Projucer stores the metadata that describe this GUI layout, so
-    make changes in here at your peril!
+    This is where the Projucer stores the metadata that describe this GUI layout
 
 BEGIN_JUCER_METADATA
 
@@ -859,6 +858,4 @@ END_JUCER_METADATA
 */
 #endif
 
-
-//[EndFile] You can add extra defines here...
 //[/EndFile]
